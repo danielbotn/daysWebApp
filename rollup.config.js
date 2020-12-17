@@ -31,10 +31,10 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
+				preprocess: sveltePreprocess(),
 				compilerOptions: {
 					dev,
-					hydratable: true,
-				preprocess: sveltePreprocess()
+					hydratable: true
 				}
 			}),
 			url({
@@ -83,11 +83,11 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
+				preprocess: sveltePreprocess(),
 				compilerOptions: {
 					dev,
 					generate: 'ssr',
-					hydratable: true,
-				preprocess: sveltePreprocess()
+					hydratable: true
 				},
 				emitCss: false
 			}),
