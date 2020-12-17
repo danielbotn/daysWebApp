@@ -10,6 +10,7 @@ import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import { preprocess } from './svelte.config';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -31,11 +32,11 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
-				preprocess: sveltePreprocess(),
 				compilerOptions: {
 					dev,
 					hydratable: true
-				}
+				},
+				preprocess
 			}),
 			url({
 				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
@@ -83,13 +84,13 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
-				preprocess: sveltePreprocess(),
 				compilerOptions: {
 					dev,
 					generate: 'ssr',
 					hydratable: true
 				},
-				emitCss: false
+				emitCss: false,
+				preprocess
 			}),
 			url({
 				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
