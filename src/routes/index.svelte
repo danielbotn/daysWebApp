@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Login from '../components/Login/Login.svelte';
 </script>
 
