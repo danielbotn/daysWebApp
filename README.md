@@ -1,5 +1,3 @@
-# Days "Web App"
-
 <div align="center">
 
 ![Days Logo](https://i.ibb.co/MGYRd2t/days-github-logo.png)
