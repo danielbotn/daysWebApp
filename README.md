@@ -38,37 +38,9 @@ This application should have the same functionality as the app. The following te
 
 - [Node and NPM](https://nodejs.org/)
 
-## Running locally
-
-```bash
-# install the project dependencies
-npm install
-
-# run the build and server locally
-npm run start
-
-# add env variables in script tag using browserify and envify
-browserify app.js -t [envify --YOUR_ENV_VARIABLE yourEnvString] > bundle.js
-
-# run the production build
-npm run build
-```
-
 ## Deployment
 
-```bash
-# Here we are using surge for deployment
-# path http://stale-acoustics.surge.sh/ --> name stale-acoustics.surge.sh
-
-# build browserify
-browserify app.js -t [envify --DAYS_SECRET_KEY my-super-secre-key --DAYS_SECRET_PASSWORD my-super-secret-password] > bundle.js
-
-# build
-npm run build
-
-# For production deployment on surge
-surge dist
-```
+To Do
 
 ### Running the project
 
