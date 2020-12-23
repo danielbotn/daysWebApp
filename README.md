@@ -26,6 +26,7 @@ Days is a mobile application written in react native. The source code for that p
 This application should have the same functionality as the app. The following technology is used to make this happen.
 
 - [Svelte](https://svelte.dev/) Front end technology similar to React or Vue.
+- [Sapper](https://sapper.svelte.dev/) Next.js for the Svelte world
 - [Rollup](https://rollupjs.org/guide/en/) Rollup is a module bundler for JavaScript similar to Webpack
 - [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow.
 - [Firebase](https://firebase.google.com/) DaaS for idiots that are to lazy to code their own server.
