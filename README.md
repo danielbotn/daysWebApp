@@ -1,50 +1,85 @@
-# sapper-template
+# Days "Web App"
 
-The default template for setting up a [Sapper](https://github.com/sveltejs/sapper) project. Can use either Rollup or webpack as bundler.
+<div align="center">
 
+![Days Logo](http://stale-acoustics.surge.sh/assets/images/favicon/daysLogoMini.png)
 
-## Getting started
+</div>
 
+<p align="center" color="#6a737d">
+  A web application written in Svelte and Sapper, using Typescript
+</p>
 
-### Using `degit`
+<div align="center">
 
-To create a new Sapper project based on Rollup locally, run
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/makes-people-smile.svg)](http://forthebadge.com)
+</div>
+
+<div align="center">
+
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+</div>
+
+Days is a mobile application written in react native. The source code for that project will be open sourced soon. On the other hand, this project is the upcoming web application.
+
+This application should have the same functionality as the app. The following technology is used to make this happen.
+
+- [Svelte](https://svelte.dev/) Front end technology similar to React or Vue.
+- [Rollup](https://rollupjs.org/guide/en/) Rollup is a module bundler for JavaScript similar to Webpack
+- [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow.
+- [Firebase](https://firebase.google.com/) DaaS for idiots that are to lazy to code their own server.
+- [Typescript](https://www.typescriptlang.org/) Types added to Javascript
+
+---
+
+## Prerequisites
+
+- [Node and NPM](https://nodejs.org/)
+
+## Running locally
 
 ```bash
-npx degit "sveltejs/sapper-template#rollup" my-app
+# install the project dependencies
+npm install
+
+# run the build and server locally
+npm run start
+
+# add env variables in script tag using browserify and envify
+browserify app.js -t [envify --YOUR_ENV_VARIABLE yourEnvString] > bundle.js
+
+# run the production build
+npm run build
 ```
 
-For a webpack-based project, instead run
+## Deployment
 
 ```bash
-npx degit "sveltejs/sapper-template#webpack" my-app
+# Here we are using surge for deployment
+# path http://stale-acoustics.surge.sh/ --> name stale-acoustics.surge.sh
+
+# build browserify
+browserify app.js -t [envify --DAYS_SECRET_KEY my-super-secre-key --DAYS_SECRET_PASSWORD my-super-secret-password] > bundle.js
+
+# build
+npm run build
+
+# For production deployment on surge
+surge dist
 ```
-
-[`degit`](https://github.com/Rich-Harris/degit) is a scaffolding tool that lets you create a directory from a branch in a repository.
-
-Replace `my-app` with the path where you wish to create the project.
-
-
-### Using GitHub templates
-
-Alternatively, you can create the new project as a GitHub repository using GitHub's template feature.
-
-Go to either [sapper-template-rollup](https://github.com/sveltejs/sapper-template-rollup) or [sapper-template-webpack](https://github.com/sveltejs/sapper-template-webpack) and click on "Use this template" to create a new project repository initialized by the template.
-
 
 ### Running the project
 
 Once you have created the project, install dependencies and run the project in development mode:
 
 ```bash
-cd my-app
-npm install # or yarn
+cd daysWebApp
+npm install
 npm run dev
 ```
 
 This will start the development server on [localhost:3000](http://localhost:3000). Open it and click around.
-
-You now have a fully functional Sapper project! To get started developing, consult [sapper.svelte.dev](https://sapper.svelte.dev).
 
 ### Using TypeScript
 

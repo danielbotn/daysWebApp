@@ -1,5 +1,5 @@
 import * as sapper from '@sapper/app';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 var firebaseConfig = {
 	apiKey: process.env.SAPPER_APP_API_KEY,
 	authDomain: process.env.SAPPER_APP_AUTH_DOMAIN,

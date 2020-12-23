@@ -1,11 +1,23 @@
 <script lang="ts">
   import Spinner from '../Svgs/Spinner.svelte';
+  import firebase from 'firebase/app';
+  import 'firebase/auth';
+  import { goto } from '@sapper/app';
+  
   let email: string = '';
   let password: string = '';
   let loginPressed = false;
 
   const login = () : void => {
     loginPressed = true;
+    firebase.auth().signInWithEmailAndPassword(email,password)
+      .then(() => {
+        loginPressed = false;
+        goto('/dashboard');
+      })
+      .catch(() => {
+        loginPressed = false;
+      })
   };
 
 </script>
@@ -20,7 +32,7 @@
   }
 
   button {
-    @apply w-full p-3 mt-4 bg-indigo-600 text-white rounded shadow;
+    @apply w-full p-3 mt-4 bg-blue-500 text-white rounded shadow;
   }
 
   .wrapper {
@@ -39,7 +51,7 @@
            </div>
            <div class="mb-5">
               <label for="password">Password</label>
-              <input type="text" name="password" bind:value="{password}" placeholder="Password" />
+              <input type="password" name="password" bind:value="{password}" placeholder="Password" />
            </div>
            <button on:click="{login}">
             {#if loginPressed}
@@ -50,7 +62,7 @@
            </button>
         </div>
         <div class="wrapper">
-           <a href="/" class="font-medium text-indigo-500">Create account</a>
+           <a href="/" class="font-medium text-blue-500">Create account</a>
            <a href="/" class="text-gray-600">Forgot password?</a>
         </div>
      </div>
