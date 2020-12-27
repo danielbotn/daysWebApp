@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Nav from '../components/Nav.svelte';
+	import Nav from '../components/Nav/Nav.svelte';
 	import { onMount } from 'svelte';
 	import firebase from 'firebase';
 	import { stores } from '@sapper/app';
