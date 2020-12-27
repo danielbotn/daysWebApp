@@ -1,15 +1,20 @@
 <script context="module">
-	let userIsLoggedIn = false;
+	import { userId } from '../../../store';
 	export async function preload(page, session) {
 		let { user } = session;
 		if (!user && user !== "false") {
-				userIsLoggedIn = false;
 		    return this.redirect(302, '/');
 		}
-		if (user === true) {
+	}
+</script>
+
+<script lang="ts">
+	let userIsLoggedIn : boolean = false;
+	userId.subscribe(value => {
+		if (value !== null) {
 			userIsLoggedIn = true;
 		}
-	}
+	});
 </script>
 <svelte:head>
 	<title>Dahsboard</title>

@@ -1,11 +1,13 @@
 <script lang="ts">
 	import firebase from 'firebase';
-	import { goto } from '@sapper/app';
+   import { goto } from '@sapper/app';
+   import { userId } from '../../../store';
 	export let segment: string;
 
 	const logout = () : Promise<void> => {
 		console.log('you clicked logout');
 		return firebase.auth().signOut().then(() => {
+            userId.set(null);
             goto('/');
         });
 	}

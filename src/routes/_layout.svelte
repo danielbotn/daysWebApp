@@ -5,7 +5,8 @@
 	import { stores } from '@sapper/app';
 	export let segment: string;
 	const { session } = stores();
-	import Cookies from 'js-cookie';
+    import Cookies from 'js-cookie';
+    import { userId } from '../../store';
 
 	    onMount(async () => {
         firebase.auth().onIdTokenChanged(async (user) => {
@@ -14,9 +15,11 @@
                     console.log(`User does not exist`);
                     Cookies.set('token', false);
                     $session.user = false;
+                    userId.set(null);
                     return;
                 }
                 const token = await user.getIdToken();
+                userId.set(token);
                 $session.user = token;
                 Cookies.set('token', token);
                 console.log(`User found and session set!`);
