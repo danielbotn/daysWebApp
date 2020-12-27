@@ -1,23 +1,25 @@
 <script lang="ts">
-  import Spinner from '../Svgs/Spinner.svelte';
-  import firebase from 'firebase/app';
-  import 'firebase/auth';
-  import { goto } from '@sapper/app';
-  
-  let email: string = '';
-  let password: string = '';
+  import Spinner from "../Svgs/Spinner.svelte";
+  import firebase from "firebase/app";
+  import "firebase/auth";
+  import { goto } from "@sapper/app";
+
+  let email: string = "";
+  let password: string = "";
   let loginPressed = false;
 
-  const login = () : void => {
+  const login = (): void => {
     loginPressed = true;
-    firebase.auth().signInWithEmailAndPassword(email,password)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         loginPressed = false;
-        goto('/dashboard');
+        goto("/dashboard");
       })
       .catch(() => {
         loginPressed = false;
-      })
+      });
   };
 
 </script>
