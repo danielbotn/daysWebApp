@@ -1,6 +1,7 @@
-<script context="module">
+<script context="module" lang="ts">
 	import { userId } from '../../../store';
-	export async function preload(page, session) {
+	import type { ISession, IPage } from '../../interfaces/IConfig';
+	export async function preload(_page: IPage, session: ISession) {
 		let { user } = session;
 		if (!user && user !== "false") {
 		    return this.redirect(302, '/');
@@ -14,7 +15,7 @@
 		if (value !== null) {
 			userIsLoggedIn = true;
 		}
-	});
+	}); // logs '0'
 </script>
 <svelte:head>
 	<title>Dahsboard</title>

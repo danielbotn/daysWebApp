@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import firebase from 'firebase';
 	import { stores } from '@sapper/app';
-	export let segment: string;
 	const { session } = stores();
     import Cookies from 'js-cookie';
     import { userId } from '../../store';
@@ -46,13 +45,12 @@
 		position: relative;
 		max-width: 56em;
 		background-color: white;
-		padding: 2em;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
 </style>
 
-<Nav {segment}/>
+<Nav />
 
 <main>
 	<slot></slot>
