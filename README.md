@@ -27,7 +27,7 @@ This application should have the same functionality as the app. The following te
 - [Sapper](https://sapper.svelte.dev/) Next.js for the Svelte world
 - [Rollup](https://rollupjs.org/guide/en/) Rollup is a module bundler for JavaScript similar to Webpack
 - [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow.
-- [Firebase](https://firebase.google.com/) DaaS for idiots that are to lazy to code their own server.
+- [Firebase](https://firebase.google.com/) DaaS platform by google
 - [Typescript](https://www.typescriptlang.org/) Types added to Javascript
 
 ---
