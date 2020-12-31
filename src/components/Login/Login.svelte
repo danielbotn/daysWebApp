@@ -36,7 +36,7 @@
   }
 
   input {
-    @apply block w-full p-3 rounded border border-gray-200; focus:outline-none;
+    @apply block border border-gray-200 w-full p-3 rounded mb-4;
   }
 
   button {
@@ -44,52 +44,48 @@
   }
 
   .wrapper {
-    @apply flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100;
+    @apply flex justify-between pt-8 text-sm border-t border-gray-300;
   }
 
 </style>
 
-<div class="container mx-auto p-8 flex">
-  <div class="max-w-md w-full mx-auto">
-     <div class="bg-white rounded-lg overflow-hidden shadow-2xl">
-        <div class="p-8">
-           <div class="mb-5">
-              <label for="LoginEmail">Email</label>
-              <input 
-                type="text" 
-                name="LoginEmail" 
-                bind:value="{email}" 
-                placeholder="Email" 
-                autocomplete="new-password" 
-                id="LoginEmail" 
-              />
-           </div>
-           <div class="mb-5">
-              <label for="LoginPassword">Password</label>
-              <input 
-                type="password" 
-                name="LoginPassword" 
-                bind:value="{password}" 
-                placeholder="Password" 
-                autocomplete="new-password" 
-                id="LoginPassword" 
-              />
-           </div>
-           {#if !invalidAuthentication}
+
+<div class="bg-grey-lighter min-h-screen flex flex-col">
+  <div class="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+          <h1 class="mb-8 text-3xl text-center">Login</h1>
+          <label for="Email">Email</label>
+          <input 
+            type="text"
+            name="Email"
+            placeholder="Email"
+            id="email"
+            autocomplete="off"
+            bind:value="{email}"
+          />
+          <label for="Password">Password</label>
+          <input 
+            type="password"
+            name="Password"
+            id="password"
+            placeholder="Password"
+            autocomplete="new-password"
+            bind:value="{password}"
+          />
+          {#if !invalidAuthentication}
             <p class="text-red-500 text-xs italic">{invalidMessage}</p>
            {/if}
-           <button on:click="{login}">
+          <button on:click="{login}">
             {#if loginPressed}
               <Spinner />
             {:else}
               Login
             {/if }
            </button>
-        </div>
-        <div class="wrapper">
-           <a href="/register" class="font-medium text-blue-500">Create account</a>
-           <a href="/forgotPassword" class="text-gray-600">Forgot password?</a>
-        </div>
-     </div>
+          <div class="wrapper">
+            <a href="/register" class="font-medium text-blue-500">Create account</a>
+            <a href="/forgotPassword" class="text-gray-600">Forgot password?</a>
+         </div>
+      </div>
   </div>
 </div>
