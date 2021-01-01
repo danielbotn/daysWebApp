@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" context="module">
   import Spinner from "../Svgs/Spinner.svelte";
   import firebase from "firebase/app";
   import "firebase/auth";
@@ -7,9 +7,9 @@
 
   let email: string = "";
   let password: string = "";
-  let loginPressed : boolean = false;
-  let invalidAuthentication : boolean = true;
-  let invalidMessage : string = '';
+  let loginPressed: boolean = false;
+  let invalidAuthentication: boolean = true;
+  let invalidMessage: string = '';
 
   const login = (): void => {
     loginPressed = true;

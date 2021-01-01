@@ -8,7 +8,7 @@
       isLoggedIn = value;
    });
 
-	const logout = async () : Promise<void> => {
+	const logout = async (): Promise<void> => {
 		await firebase.auth().signOut();
       userId.set(null);
       goto('/');
