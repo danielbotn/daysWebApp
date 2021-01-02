@@ -1,5 +1,8 @@
 <script lang="ts">
     import * as EmailValidator from 'email-validator';
+    import { registerUserDataBase } from '../../helpers/api/api';
+    import firebase from "firebase/app";
+    import "firebase/database";
     import Spinner from '../../components/Svgs/Spinner.svelte';
     import SuccessPage from '../../components/SuccessPage/SuccessPage.svelte';
 
@@ -7,34 +10,62 @@
     let registerSuccessfull: boolean = false;
     let firstName = '', lastName = '', email = '', password = '';
     let firstNameError = false, lastNameError = false, emailError = false, passwordError = false;
+    let firebaseErrorMessage = '';
 
-    const validation = () => {
+    const validation = (): boolean =>  {
+      let result: boolean = false;
         if (firstName === '') {
             firstNameError = true;
+            result = true;
         } else {
             firstNameError = false;
         }
         if (lastName === '') {
             lastNameError = true;
+            result = true;
         } else {
             lastNameError = false;
         }
         if (email === '' || !EmailValidator.validate(email)) {
             emailError = true;
+            result = true;
         } else {
             emailError = false;
         }
         if (password === '') {
             passwordError = true;
+            result = true;
         } else {
             passwordError = false;
         }
+      return result;
     };
+
+    const sendToFirebase = async () => {
+      try {
+        const a = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password);
+        a.user.sendEmailVerification();
+        registerUserDataBase(firstName, lastName, a.user.email, a.user.uid);
+        registerSuccessfull = true;
+        firebaseErrorMessage = '';
+      } catch (err) {
+        firebaseErrorMessage = err.message;
+      }
+    };
+
+
     const register = () => {
         regButtonPressed = true;
-        console.log('you just clicked the register button');
-        validation();
-        registerSuccessfull = true;
+        if (validation()) {
+          regButtonPressed = false;
+
+        } else {
+          // No validation Error
+          regButtonPressed = false;
+          sendToFirebase();
+        }
     };
 </script>
 
@@ -94,6 +125,9 @@
               autocomplete="new-password"
               bind:value="{password}"
             />
+            {#if firebaseErrorMessage !== ''}
+              <span class="text-red-500 text-xs italic">{firebaseErrorMessage}</span>
+            {/if}
             <button on:click="{register}">
               {#if regButtonPressed}
                 <Spinner />

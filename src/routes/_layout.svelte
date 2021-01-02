@@ -1,39 +1,39 @@
 <script lang="ts">
-	import Nav from '../components/Nav/Nav.svelte';
-	import { onMount } from 'svelte';
-	import firebase from 'firebase';
-	import { stores } from '@sapper/app';
+	import Nav from "../components/Nav/Nav.svelte";
+	import { onMount } from "svelte";
+	import firebase from "firebase";
+	import { stores } from "@sapper/app";
 	const { session } = stores();
-    import Cookies from 'js-cookie';
-    import { userId } from '../../store';
+	import Cookies from "js-cookie";
+	import { userId } from "../../store";
 
-	    onMount(async () => {
-        firebase.auth().onIdTokenChanged(async (user) => {
-            try {
-                if (!user) {
-                    Cookies.set('token', false);
-                    $session.user = false;
-                    userId.set(null);
-                    return;
-                }
-                const token = await user.getIdToken();
-                userId.set(token);
-                $session.user = token;
-                Cookies.set('token', token);
-                // refreshes token every 55 minutes to also sync with server-side. 
-                window.timeoutId = setTimeout(() => {
-                    const user = firebase.auth().currentUser;
-                    if (user) {
-                        return firebase.auth().currentUser.getIdToken(true);
-                    }
-                }, 1000 * 60 * 55);
-            } catch (e) {
-                Cookies.set('token', false);
-                $session.user = false;
-                return;
-            }
-        });
-    });
+	onMount(async () => {
+	firebase.auth().onIdTokenChanged(async (user) => {
+			try {
+			if (!user || !user.emailVerified) {
+					Cookies.set("token", false);
+					$session.user = false;
+					userId.set(null);
+					return;
+			}
+			const token = await user.getIdToken();
+			userId.set(token);
+			$session.user = token;
+			Cookies.set("token", token);
+			// refreshes token every 55 minutes to also sync with server-side.
+			window.timeoutId = setTimeout(() => {
+					const user = firebase.auth().currentUser;
+					if (user) {
+					return firebase.auth().currentUser.getIdToken(true);
+					}
+			}, 1000 * 60 * 55);
+			} catch (e) {
+			Cookies.set("token", false);
+			$session.user = false;
+			return;
+			}
+	});
+	});
 </script>
 
 <style>

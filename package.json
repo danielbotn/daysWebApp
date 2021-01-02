@@ -20,6 +20,7 @@
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.5",
     "cssnano": "^4.1.10",
+    "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "email-validator": "^2.0.4",
     "firebase": "^8.2.0",

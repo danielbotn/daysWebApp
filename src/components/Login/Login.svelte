@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts">
   import Spinner from "../Svgs/Spinner.svelte";
   import firebase from "firebase/app";
   import "firebase/auth";
@@ -11,15 +11,23 @@
   let invalidAuthentication: boolean = true;
   let invalidMessage: string = '';
 
-  const login = (): void => {
+  const login = () => {
     loginPressed = true;
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        invalidAuthentication = true;
-        loginPressed = false;
-        goto("/dashboard");
+      .then((data) => {
+        if (data.user.emailVerified) {
+          console.log('data', data.user.emailVerified);
+          invalidAuthentication = true;
+          loginPressed = false;
+          goto("/dashboard");
+
+        } else {
+          invalidAuthentication = false;
+          invalidMessage = 'Please verify your email before continue!';
+          loginPressed = false;
+        }
       })
       .catch((data: IError) => {
         invalidMessage = data.message;
@@ -78,9 +86,10 @@
           <button on:click="{login}">
             {#if loginPressed}
               <Spinner />
-            {:else}
-              Login
             {/if }
+            {#if !loginPressed}
+             Login
+            {/if}
            </button>
           <div class="wrapper">
             <a href="/register" class="font-medium text-blue-500">Create account</a>

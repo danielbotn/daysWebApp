@@ -1,4 +1,4 @@
-<style>
+<style style="postcss">
   i {
     font-size: 100px;
     line-height: 200px;
@@ -20,7 +20,7 @@
   export let email: string;
 </script>
 
-<div class="bg-grey-lighter min-h-screen flex flex-col">
+<div class="bg-grey-lighter min-h-screen flex flex-col card">
   <div class="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
       <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
           <h1 class="mb-8 text-3xl text-center text-green-500">Success</h1>
