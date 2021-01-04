@@ -17,7 +17,6 @@
           maxLength: 80 
         } 
       });
-      console.log('data', res.data);
       quote.author = res.data.author;
       quote.content = res.data.content;
     } catch (err) {

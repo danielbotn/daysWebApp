@@ -36,7 +36,7 @@
         <ul class="list-reset text-black mb-8 p-8 text-grey-darker rounded shadow-lg">
           {#each boards as item}
            <li class="flex items-center mb-3">
-              <img class="flex-none w-8 mr-2 rounded" src={item.Avatar} alt="gaur" />
+              <img class="flex-none w-8 mr-2 rounded" src={item.Avatar} alt={`Icon related with ${item.NameOfList}`} />
               {item.NameOfList}
            </li> 
           {/each}
