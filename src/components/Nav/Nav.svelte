@@ -24,19 +24,18 @@
   <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="menu">
      <nav>
         <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
-            <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-blue-500" href="/">Home</a></li>
-            <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-blue-500" href="/contact">Contact</a></li>
             {#if isLoggedIn}
                <button class="px-6 py-2 border border-blue-500 text-blue-500 max-w-max shadow-sm hover:shadow-md" on:click="{logout}">Logout</button>
             {/if}
         </ul>
      </nav>
   </div>
-  <div class="visible md:invisible">
+  <div class="visible lg:invisible">
    <nav>
       <ul class="flex">
-         <li><a class="block pr-5" href="/">Home</a></li>
-         <li><a class="block" href="/contact">Contact</a></li>
+         {#if isLoggedIn}
+            <button class="px-6 py-2 border border-blue-500 text-blue-500 max-w-max shadow-sm hover:shadow-md" on:click="{logout}">Logout</button>
+         {/if}
       </ul>
    </nav>
   </div>

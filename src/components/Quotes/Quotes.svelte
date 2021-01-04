@@ -26,7 +26,7 @@
   });
 </script>
 
-<div class="lg:text-center">
+<div class="text-center">
   <h2 class="font-semibold tracking-wide uppercase text-4xl">Your Boards</h2>
   <q class="mt-4 max-w-2xl text-sm text-gray-500 lg:mx-auto">
     {quote.content}

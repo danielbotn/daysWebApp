@@ -16,7 +16,6 @@
   });
 
   onMount(async () => {
-    console.log('dashboard mounted');
     let allBoards = null;
     const rootRef = firebase.database().ref();
     allBoards = rootRef
