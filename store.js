@@ -1,3 +1,4 @@
 import { writable } from "svelte/store";
 
-export const userId = writable(null);
+export const userToken = writable(null);
+export const userID = writable(null);

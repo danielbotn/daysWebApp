@@ -138,10 +138,10 @@
   
             <div class="text-center text-sm text-grey-dark mt-4">
                 By signing up, you agree to the 
-                <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                <a class="no-underline border-b border-grey-dark text-grey-dark" href="http://stale-acoustics.surge.sh/privacy-policy/">
                     Terms of Service
                 </a> and 
-                <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                <a class="no-underline border-b border-grey-dark text-grey-dark" href="http://stale-acoustics.surge.sh/privacy-policy/">
                     Privacy Policy
                 </a>
             </div>

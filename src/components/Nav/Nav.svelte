@@ -1,16 +1,16 @@
 <script lang="ts">
 	import firebase from 'firebase';
    import { goto } from '@sapper/app';
-   import { userId } from '../../../store';
+   import { userToken } from '../../../store';
 
    let isLoggedIn = null;
-   userId.subscribe(value => {
+   userToken.subscribe(value => {
       isLoggedIn = value;
    });
 
 	const logout = async (): Promise<void> => {
 		await firebase.auth().signOut();
-      userId.set(null);
+      userToken.set(null);
       goto('/');
    }
 </script>

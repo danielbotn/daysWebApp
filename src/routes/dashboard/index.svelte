@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import { userId } from '../../../store';
+	import { userToken } from '../../../store';
 	import type { ISession, IPage } from '../../interfaces/IConfig';
 	export async function preload(_page: IPage, session: ISession) {
 		let { user } = session;
@@ -10,8 +10,10 @@
 </script>
 
 <script lang="ts">
+import Dashboard from "../../components/Dashboard/Dashboard.svelte";
+
 	let userIsLoggedIn : boolean = false;
-	userId.subscribe(value => {
+	userToken.subscribe(value => {
 		if (value !== null) {
 			userIsLoggedIn = true;
 		}
@@ -22,6 +24,5 @@
 </svelte:head>
 
 {#if userIsLoggedIn}
-	<h1>Dashboard</h1>
-	<p>TODO...</p>
+	<Dashboard />
 {/if}

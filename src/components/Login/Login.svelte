@@ -18,7 +18,6 @@
       .signInWithEmailAndPassword(email, password)
       .then((data) => {
         if (data.user.emailVerified) {
-          console.log('data', data.user.emailVerified);
           invalidAuthentication = true;
           loginPressed = false;
           goto("/dashboard");

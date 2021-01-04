@@ -17,6 +17,7 @@
     "eslint:fix": "eslint --fix ./*.js ./src/*.ts ./src/components/**/*.svelte ./src/graphql/**/*.ts ./src/routes/**/*.svelte ./src/routes/**/*.ts"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.5",
     "cssnano": "^4.1.10",
