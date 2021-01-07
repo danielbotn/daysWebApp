@@ -68,3 +68,47 @@ export const registerUserDataBase = (
 	createMemberPlan(UserId);
 	createLanguage(UserId);
 };
+
+const getTotalListCounter = (userId: string): Promise<any> => {
+	const listCounterPromise = new Promise((resolve, reject) => {
+		const db = firebase.database();
+		const lc = db.ref(`/listCounter/${userId}`);
+		lc.once("value").then((snapshot) => {
+			const listCounter = snapshot.val();
+			if (listCounter) {
+				resolve(listCounter);
+			} else {
+				reject(listCounter);
+			}
+		});
+	});
+	return listCounterPromise;
+};
+
+const updateListCounter = (total: number, userId: string): void => {
+	const db = firebase.database();
+	db.ref(`/listCounter/${userId}`).update({
+		TotalLists: total,
+	});
+};
+
+export const createNewList = async (
+	typeOfList: string,
+	listName: string,
+	userId: string,
+): Promise<unknown> => {
+	const listCounter = await getTotalListCounter(userId);
+	const listCounterPlusOne = listCounter.TotalLists + 1;
+	updateListCounter(listCounterPlusOne, userId);
+	const rand = Math.floor(Math.random() * 200) + 1;
+	const db = firebase.database();
+	return db.ref(`/boards/${userId}`).push({
+		ListCreated: format(new Date(), "yyyy-mm-dd"),
+		UserId: userId,
+		NameOfList: listName,
+		Avatar: `https://picsum.photos/id/${rand}/200/300`,
+		TypeOfList: typeOfList,
+		WriteAccess: true,
+		ReadAccess: true,
+	});
+};

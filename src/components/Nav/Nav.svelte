@@ -25,7 +25,11 @@
      <nav>
         <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
             {#if isLoggedIn}
-               <button class="px-6 py-2 border border-blue-500 text-blue-500 max-w-max shadow-sm hover:shadow-md" on:click="{logout}">Logout</button>
+               <button 
+                  class="px-6 py-2 border border-blue-500 text-blue-500 max-w-max shadow-sm hover:shadow-md" 
+                  on:click="{logout}">
+                  Logout
+               </button>
             {/if}
         </ul>
      </nav>
@@ -34,7 +38,11 @@
    <nav>
       <ul class="flex">
          {#if isLoggedIn}
-            <button class="px-6 py-2 border border-blue-500 text-blue-500 max-w-max shadow-sm hover:shadow-md" on:click="{logout}">Logout</button>
+            <button 
+              class="px-6 py-2 border border-blue-500 text-blue-500 max-w-max shadow-sm hover:shadow-md" 
+              on:click="{logout}">
+              Logout
+            </button>
          {/if}
       </ul>
    </nav>
