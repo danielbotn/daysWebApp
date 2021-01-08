@@ -54,6 +54,15 @@ This project uses continuous integration
   git push
 ```
 
+Note! To add routes that are not linked via a href tag, add an invisible a tag, otherwise sapper wount export the route to the  
+`__sapper__/export` folder
+
+```html
+  <div style="visibility: hidden; position: absolute">
+    <a href="/dashboard">...</a>
+  </div>
+```
+
 After the changes have been pushed to master, A Vercel deployment is triggered.
 
 ### Running the project
