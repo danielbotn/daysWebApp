@@ -32,6 +32,9 @@
                </button>
             {/if}
         </ul>
+        <div style="visibility: hidden; position: absolute">
+         <a href="/dashboard">...</a>
+       </div>
      </nav>
   </div>
   <div class="visible lg:invisible">
@@ -45,6 +48,9 @@
             </button>
          {/if}
       </ul>
+      <div style="visibility: hidden; position: absolute">
+         <a href="/dashboard">...</a>
+       </div>
    </nav>
   </div>
 </header>
