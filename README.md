@@ -2,6 +2,8 @@
 
 ![Days Logo](https://i.ibb.co/MGYRd2t/days-github-logo.png)
 
+[Click here to go to Days Demo website](https://days-web-app.vercel.app/)
+
 </div>
 
 <p align="center" color="#6a737d">
@@ -38,7 +40,9 @@ This application should have the same functionality as the app. The following te
 
 ## Deployment
 
-To Do
+This website is hosted on [Vercel](https://vercel.com/) A cloud platform for serverless deployment.  
+
+To check out deployment logs and configuration go to: [Vercel Dashboard](https://vercel.com/dashbaord)
 
 ### Running the project
 
