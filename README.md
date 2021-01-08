@@ -42,7 +42,7 @@ This application should have the same functionality as the app. The following te
 
 This website is hosted on [Vercel](https://vercel.com/) A cloud platform for serverless deployment.  
 
-To check out deployment logs and configuration go to: [Vercel Dashboard](https://vercel.com/dashbaord)
+To check out deployment logs and configuration go to: [Vercel Dashboard](https://vercel.com/dashboard)
 
 This project uses continuous integration
 
