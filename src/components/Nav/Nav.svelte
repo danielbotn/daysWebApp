@@ -38,6 +38,12 @@
        <div style="visibility: hidden; position: absolute">
          <a href="/single">...</a>
       </div>
+      <div style="visibility: hidden; position: absolute">
+         <a href="/multiple">...</a>
+      </div>
+      <div style="visibility: hidden; position: absolute">
+         <a href="/logger">...</a>
+      </div>
      </nav>
   </div>
   <div class="visible lg:invisible">
@@ -56,6 +62,12 @@
       </div>
       <div style="visibility: hidden; position: absolute">
          <a href="/single">...</a>
+      </div>
+      <div style="visibility: hidden; position: absolute">
+         <a href="/multiple">...</a>
+      </div>
+      <div style="visibility: hidden; position: absolute">
+         <a href="/logger">...</a>
       </div>
    </nav>
   </div>
