@@ -43,7 +43,7 @@
 
   const returnPath = (item: IBoard) => {
     let route = item.TypeOfList;
-    return `${route}/${item.KeyId}`
+    return `${route}?id=${item.KeyId}`
   }
 
 </script>
