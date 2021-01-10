@@ -35,6 +35,9 @@
         <div style="visibility: hidden; position: absolute">
          <a href="/dashboard">...</a>
        </div>
+       <div style="visibility: hidden; position: absolute">
+         <a href="/single">...</a>
+      </div>
      </nav>
   </div>
   <div class="visible lg:invisible">
@@ -50,7 +53,10 @@
       </ul>
       <div style="visibility: hidden; position: absolute">
          <a href="/dashboard">...</a>
-       </div>
+      </div>
+      <div style="visibility: hidden; position: absolute">
+         <a href="/single">...</a>
+      </div>
    </nav>
   </div>
 </header>
