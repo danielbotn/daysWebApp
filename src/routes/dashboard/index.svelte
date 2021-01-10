@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-import Dashboard from "../../components/Dashboard/Dashboard.svelte";
+	import Dashboard from "../../components/Dashboard/Dashboard.svelte";
 
 	let userIsLoggedIn : boolean = false;
 	userToken.subscribe(value => {

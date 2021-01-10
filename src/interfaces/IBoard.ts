@@ -6,4 +6,5 @@ export interface IBoard {
   TypeOfList: string;
   UserId: string;
   WriteAccess: boolean;
+  KeyId: string;
 }

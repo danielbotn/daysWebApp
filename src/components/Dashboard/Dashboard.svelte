@@ -26,6 +26,10 @@
     allBoards.on('value', (snap: { val: () => any; }) => {
       const boardsObject = snap.val();
       boards = Object.values(boardsObject);
+      const objectKeys = Object.keys(boardsObject);
+      boards.forEach((item, index) => {
+        item["KeyId"] = objectKeys[index];
+      });
     });
   });
 
@@ -37,6 +41,11 @@
     modalOpen = !modalOpen;
   };
 
+  const returnPath = (item: IBoard) => {
+    let route = item.TypeOfList;
+    return `${route}/${item.KeyId}`
+  }
+
 </script>
 
 <section class="py-12">
@@ -47,7 +56,7 @@
           {#each boards as item}
            <li class="flex items-center mb-3">
               <img class="flex-none w-8 mr-2 rounded" src={item.Avatar} alt={`Icon related with ${item.NameOfList}`} />
-              {item.NameOfList}
+              <a href={returnPath(item)}>{item.NameOfList}</a>
            </li> 
           {/each}
         </ul>
