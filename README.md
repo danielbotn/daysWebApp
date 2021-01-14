@@ -83,7 +83,7 @@ This will start the development server on [localhost:3000](http://localhost:3000
 
 Dato CMS is an awesome headless cms.  
 
-![Dato CMS](https://cdn-images-1.medium.com/max/1200/1*PrlaU5fUTZC7QOqyhZ1pWA.png)
+![Dato CMS](https://media-exp1.licdn.com/dms/image/C4E0BAQHxGEQQYcciVw/company-logo_200_200/0/1548759861587?e=2159024400&v=beta&t=B08Jz5tM5dhYbiObXJ0W8oIB1Dd4y3DSJHslzN3Fuvs)
 
 
 - [Dato CMS Graphql playground](https://cda-explorer.datocms.com/)
