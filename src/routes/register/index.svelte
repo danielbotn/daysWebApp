@@ -1,6 +1,6 @@
 <script lang="ts">
     import * as EmailValidator from 'email-validator';
-    import { registerUserDataBase } from '../../helpers/api/api';
+    import { registerUserDataBase } from '../../helpers/api/firebase';
     import firebase from "firebase/app";
     import "firebase/database";
     import Spinner from '../../components/Svgs/Spinner.svelte';
