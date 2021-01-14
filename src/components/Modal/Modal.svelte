@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { userID } from '../../../store';
-  import { createNewList } from '../../helpers/api/api'
+  import { createNewList } from '../../helpers/api/firebase'
   const dispatch = createEventDispatcher();
 
   let listName: string = '';

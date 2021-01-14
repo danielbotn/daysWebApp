@@ -3,13 +3,22 @@
   import firebase from "firebase/app";
   import "firebase/auth";
   import { goto } from "@sapper/app";
+  import { hardcodedStrings } from '../../../store';
   import type { IError } from '../../interfaces/IFirebase';
+  import type { IHardcodedStrings } from '../../interfaces/IDatoCms';
 
   let email: string = "";
   let password: string = "";
   let loginPressed: boolean = false;
   let invalidAuthentication: boolean = true;
   let invalidMessage: string = '';
+  let datoHardcodedStrings: IHardcodedStrings = null;
+
+  hardcodedStrings.subscribe((value: IHardcodedStrings) => {
+    if (value !== null) {
+      datoHardcodedStrings = value;
+    }
+  });
 
   const login = () => {
     loginPressed = true;
@@ -56,44 +65,43 @@
 
 </style>
 
-
 <div class="bg-grey-lighter min-h-screen flex flex-col">
   <div class="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
-      <div class="bg-white px-6 pt-3 rounded shadow-md text-black w-full">
-          <h1 class="mb-8 text-3xl text-center">LOGIN</h1>
-          <label for="Email">Email</label>
-          <input 
-            type="text"
-            name="Email"
-            placeholder="Email"
-            id="email"
-            autocomplete="off"
-            bind:value="{email}"
-          />
-          <label for="Password">Password</label>
-          <input 
-            type="password"
-            name="Password"
-            id="password"
-            placeholder="Password"
-            autocomplete="new-password"
-            bind:value="{password}"
-          />
-          {#if !invalidAuthentication}
-            <p class="text-red-500 text-xs italic">{invalidMessage}</p>
-           {/if}
-          <button on:click="{login}">
-            {#if loginPressed}
-              <Spinner />
-            {/if }
-            {#if !loginPressed}
-             Login
-            {/if}
-           </button>
-          <div class="wrapper">
-            <a href="/register" class="font-medium text-blue-500">Create account</a>
-            <a href="/forgotPassword" class="text-gray-600">Forgot password?</a>
-         </div>
+    <div class="bg-white px-6 pt-3 rounded shadow-md text-black w-full">
+      <h1 class="mb-8 text-3xl text-center">{datoHardcodedStrings.loginHeadline}</h1>
+      <label for="Email">{datoHardcodedStrings.emailPlaceholder}</label>
+      <input 
+        type="text"
+        name="Email"
+        placeholder="Email"
+        id="email"
+        autocomplete="off"
+        bind:value="{email}"
+      />
+      <label for="Password">{datoHardcodedStrings.passwordPlaceholder}</label>
+      <input 
+        type="password"
+        name="Password"
+        id="password"
+        placeholder="Password"
+        autocomplete="new-password"
+        bind:value="{password}"
+      />
+      {#if !invalidAuthentication}
+        <p class="text-red-500 text-xs italic">{invalidMessage}</p>
+      {/if}
+      <button on:click="{login}">
+        {#if loginPressed}
+          <Spinner />
+        {/if }
+        {#if !loginPressed}
+          {datoHardcodedStrings.loginButton}
+        {/if}
+      </button>
+      <div class="wrapper">
+        <a href="/register" class="font-medium text-blue-500">{datoHardcodedStrings.createAccount}</a>
+        <a href="/forgotPassword" class="text-gray-600">{datoHardcodedStrings.forgotPassword}</a>
       </div>
+    </div>
   </div>
 </div>

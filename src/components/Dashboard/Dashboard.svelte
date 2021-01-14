@@ -4,16 +4,24 @@
   import firebase from "firebase/app";
   import "firebase/database";
   import { onMount } from 'svelte';
-  import { userID } from '../../../store';
+  import { userID, hardcodedStrings } from '../../../store';
   import type { IBoard } from '../../interfaces/IBoard';
+  import type { IHardcodedStrings } from '../../interfaces/IDatoCms';
 
   let firebaseUID: string = null;
   let boards: IBoard[] = [];
   let modalOpen: boolean = false;
+  let datoHardcodedStrings: IHardcodedStrings = null;
 
-  userID.subscribe(value => {
+  userID.subscribe((value: string) => {
     if (value !== null) {
       firebaseUID = value;
+    }
+  });
+
+  hardcodedStrings.subscribe((value: IHardcodedStrings) => {
+    if (value !== null) {
+      datoHardcodedStrings = value;
     }
   });
 
@@ -50,7 +58,7 @@
 
 <section class="py-12">
   <div class="container mx-auto">
-      <Quotes />
+      <Quotes datoHardcodedStrings={datoHardcodedStrings} />
       <div class="container my-8 mx-auto px-4 leading-normal">
         <ul class="list-reset text-black mb-8 p-8 text-grey-darker rounded shadow-lg">
           {#each boards as item}

@@ -8,6 +8,9 @@
     content: '',
   };
 
+  // Prop variable
+  export let datoHardcodedStrings: any;
+
   onMount(async () => {
     try {
       const res = await axios.get('https://api.quotable.io/random', 
@@ -27,7 +30,7 @@
 </script>
 
 <div class="text-center">
-  <h2 class="font-semibold tracking-wide uppercase text-4xl">Your Boards</h2>
+  <h2 class="font-semibold tracking-wide uppercase text-4xl">{datoHardcodedStrings.yourBoards}</h2>
   <q class="mt-4 max-w-2xl text-sm text-gray-500 lg:mx-auto">
     {quote.content}
   </q>
