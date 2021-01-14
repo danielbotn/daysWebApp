@@ -31,6 +31,7 @@ This application should have the same functionality as the app. The following te
 - [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow.
 - [Firebase](https://firebase.google.com/) DaaS platform by google
 - [Typescript](https://www.typescriptlang.org/) Types added to Javascript
+- [Dato CMS](https://www.datocms.com/) Headless CMS
 
 ---
 
@@ -65,7 +66,7 @@ Note! To add routes that are not linked via a href tag, add an invisible a tag, 
 
 After the changes have been pushed to master, A Vercel deployment is triggered.
 
-### Running the project
+## Running the project
 
 Once you have created the project, install dependencies and run the project in development mode:
 
@@ -76,3 +77,14 @@ npm run dev
 ```
 
 This will start the development server on [localhost:3000](http://localhost:3000). Open it and click around.
+
+
+## Dato CMS
+
+Dato CMS is an awesome headless cms.  
+
+![Dato CMS](https://cdn-images-1.medium.com/max/1200/1*PrlaU5fUTZC7QOqyhZ1pWA.png)
+
+
+- [Dato CMS Graphql playground](https://cda-explorer.datocms.com/)
+- [Dato CMS admin](https://days.admin.datocms.com/)
