@@ -1,42 +1,11 @@
 <script context="module">
-	import axios from 'axios';
+	import { getHardcodedStrings } from '../helpers/api/datoCms'
 	import { hardcodedStrings } from "../../store";
+
 	export async function preload() {
 		try {
-			const bookings = await axios({
-				method: 'post',
-				url: `https://graphql.datocms.com/`,
-				headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-						Authorization: `Bearer ${process.env.SAPPER_APP_DATO_CMS_API_KEY}`
-					},
-				data: JSON.stringify({
-					query: `query HardcodedStringsQuery {
-						string {
-							cancel(locale: en)
-							createList(locale: en)
-							createNewList(locale: en)
-							logger(locale: en)
-							logout(locale: en)
-							multiple(locale: en)
-							single(locale: en)
-							typeOfList(locale: en)
-							yourBoards(locale: en)
-							loginButton(locale: en)
-							loginHeadline(locale: en)
-							emailPlaceholder(locale: en)
-							forgotPassword(locale: en)
-							passwordPlaceholder(locale: en)
-							createAccount(locale: en)
-						}
-					}
-					`
-				})
-			});
-			const hcs = bookings.data.data.string;
-			hardcodedStrings.set(hcs);
-			return bookings;
+			const ghs = await getHardcodedStrings();
+			hardcodedStrings.set(ghs);
 		} catch (error) {
 			return error.response;
 		}

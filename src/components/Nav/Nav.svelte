@@ -58,6 +58,9 @@
       <div style="visibility: hidden; position: absolute">
         <a href="/logger">...</a>
       </div>
+      <div style="visibility: hidden; position: absolute">
+        <a href="/forgotPassword">...</a>
+      </div>
     </nav>
   </div>
   <div class="visible lg:invisible">
@@ -82,6 +85,9 @@
       </div>
       <div style="visibility: hidden; position: absolute">
          <a href="/logger">...</a>
+      </div>
+      <div style="visibility: hidden; position: absolute">
+        <a href="/forgotPassword">...</a>
       </div>
    </nav>
   </div>

@@ -14,6 +14,16 @@ export interface IHardcodedStrings {
   forgotPassword: string;
   passwordPlaceholder: string;
   createAccount: string;
+  registerTerms: string;
+  signupButton: string;
+  signupHeadline: string;
+  firstnamePlaceholder: string;
+  lastnamePlaceholder: string;
+  alreadyHaveAccount: string;
+  passwordError: string;
+  emailError: string;
+  lastnameError: string;
+  firstnameError: string;
 }
 
 export interface ILanguage {

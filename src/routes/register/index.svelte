@@ -5,12 +5,21 @@
     import "firebase/database";
     import Spinner from '../../components/Svgs/Spinner.svelte';
     import SuccessPage from '../../components/SuccessPage/SuccessPage.svelte';
+    import { hardcodedStrings } from '../../../store';
+    import type { IHardcodedStrings } from '../../interfaces/IDatoCms';
 
     let regButtonPressed: boolean = false;
     let registerSuccessfull: boolean = false;
     let firstName = '', lastName = '', email = '', password = '';
     let firstNameError = false, lastNameError = false, emailError = false, passwordError = false;
     let firebaseErrorMessage = '';
+    let datoHardcodedStrings: IHardcodedStrings = null;
+
+    hardcodedStrings.subscribe((value: IHardcodedStrings) => {
+      if (value !== null) {
+        datoHardcodedStrings = value;
+      }
+    });
 
     const validation = (): boolean =>  {
       let result: boolean = false;
@@ -84,44 +93,44 @@
   <div class="bg-grey-lighter min-h-screen flex flex-col">
     <div class="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
       <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+          <h1 class="mb-8 text-3xl text-center">{datoHardcodedStrings.signupHeadline}</h1>
           {#if firstNameError}
-            <span class="text-red-500 text-xs italic">Please enter first name</span>
+            <span class="text-red-500 text-xs italic">{datoHardcodedStrings.firstnameError}</span>
             {/if}
           <input 
             type="text"
             name="fullname"
-            placeholder="First Name"
+            placeholder={datoHardcodedStrings.firstnamePlaceholder}
             bind:value="{firstName}"
           />
           {#if lastNameError}
-            <span class="text-red-500 text-xs italic">Please enter last name</span>
+            <span class="text-red-500 text-xs italic">{datoHardcodedStrings.lastnameError}</span>
             {/if}
           <input 
             type="text"
             name="fullname"
-            placeholder="Last Name"
+            placeholder={datoHardcodedStrings.lastnamePlaceholder}
             bind:value="{lastName}"
           />
           {#if emailError}
-            <span class="text-red-500 text-xs italic">Please enter valid email</span>
+            <span class="text-red-500 text-xs italic">{datoHardcodedStrings.emailError}</span>
           {/if}
           <input 
             type="text"
             name="Email"
-            placeholder="Email"
+            placeholder={datoHardcodedStrings.emailPlaceholder}
             id="email"
             autocomplete="off"
             bind:value="{email}"
           />
           {#if passwordError}
-            <span class="text-red-500 text-xs italic">Please enter valid password</span>
+            <span class="text-red-500 text-xs italic">{datoHardcodedStrings.passwordError}</span>
           {/if}
           <input 
             type="password"
             name="Password"
             id="password"
-            placeholder="Password"
+            placeholder={datoHardcodedStrings.passwordPlaceholder}
             autocomplete="new-password"
             bind:value="{password}"
           />
@@ -132,7 +141,7 @@
             {#if regButtonPressed}
               <Spinner />
             {:else}
-              Create Account
+              {datoHardcodedStrings.createAccount}
             {/if }
             </button>
 

@@ -73,7 +73,7 @@
       <input 
         type="text"
         name="Email"
-        placeholder="Email"
+        placeholder={datoHardcodedStrings.emailPlaceholder}
         id="email"
         autocomplete="off"
         bind:value="{email}"
@@ -83,7 +83,7 @@
         type="password"
         name="Password"
         id="password"
-        placeholder="Password"
+        placeholder={datoHardcodedStrings.passwordPlaceholder}
         autocomplete="new-password"
         bind:value="{password}"
       />

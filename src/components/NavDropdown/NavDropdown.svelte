@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { ILanguage, IFlagLinks } from '../../interfaces/IDatoCms';
-  import { getLanguages } from '../../helpers/api/datoCms'; 
+  import { getLanguages, changeLangHardcodedStrings } from '../../helpers/api/datoCms';
+  import { hardcodedStrings } from "../../../store";
 
   let choosenLanguage :string = "english";
   let languages: ILanguage[] = [];
@@ -22,7 +23,8 @@
 		}
 	});
 
-  const changeLanguage = (newLang: any) => {
+  const changeLanguage = async (newLang: any) => {
+    console.log('change lang', newLang);
     if (newLang === 'English') {
       choosenFlag = flags.englishFlagLink;
     } else if (newLang === 'Íslenska') {
@@ -31,6 +33,9 @@
       choosenFlag = flags.swedishFlagLink;
     }
     choosenLanguage = newLang;
+    const updateHardcodedStrings = await changeLangHardcodedStrings(newLang);
+    console.log('updateHardcodedStrings', updateHardcodedStrings);
+    hardcodedStrings.set(updateHardcodedStrings);
     toogleDropdown();
   }
 

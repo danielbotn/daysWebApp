@@ -1,18 +1,26 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { userID } from '../../../store';
-  import { createNewList } from '../../helpers/api/firebase'
+  import { userID, hardcodedStrings } from '../../../store';
+  import { createNewList } from '../../helpers/api/firebase';
+  import type { IHardcodedStrings } from '../../interfaces/IDatoCms';
   const dispatch = createEventDispatcher();
 
   let listName: string = '';
   let typeOfList: string = 'multiple';
   let firebaseUID: string = null;
+  let datoHardcodedStrings: IHardcodedStrings = null;
 
   userID.subscribe(value => {
     if (value !== null) {
       firebaseUID = value;
     }
   });
+
+  hardcodedStrings.subscribe((value: IHardcodedStrings) => {
+      if (value !== null) {
+        datoHardcodedStrings = value;
+      }
+    });
 
   const closeModal = () => {
     dispatch('closeModal');
@@ -97,15 +105,15 @@
       </div>
       <!--Body-->
       <div class="my-5">
-        <h3 class="text-xl text-gray-700 mb-2 font-bold">Create New List</h3>
+        <h3 class="text-xl text-gray-700 mb-2 font-bold">{datoHardcodedStrings.createNewList}</h3>
         <input type="text" name="create new list" placeholder="List Name"  bind:value="{listName}" />
       </div>
       <div class="">
-        <h3 class="text-xl text-gray-700 mb-2 font-bold">Type of List</h3>
+        <h3 class="text-xl text-gray-700 mb-2 font-bold">{datoHardcodedStrings.typeOfList}</h3>
         <div class="flex rounded-lg text-lg">
-          <button class="{typeOfList === 'single' ? 'selected' : 'notSelected'}" on:click="{() => typeOfList = 'single'}">Single</button>
-          <button class="{typeOfList === 'multiple' ? 'selected' : 'notSelected'}" on:click="{() => typeOfList = 'multiple'}">Multiple</button>
-          <button class="{typeOfList === 'logger' ? 'selected' : 'notSelected'}" on:click="{() => typeOfList = 'logger'}">Logger</button>
+          <button class="{typeOfList === 'single' ? 'selected' : 'notSelected'}" on:click="{() => typeOfList = 'single'}">{datoHardcodedStrings.single}</button>
+          <button class="{typeOfList === 'multiple' ? 'selected' : 'notSelected'}" on:click="{() => typeOfList = 'multiple'}">{datoHardcodedStrings.multiple}</button>
+          <button class="{typeOfList === 'logger' ? 'selected' : 'notSelected'}" on:click="{() => typeOfList = 'logger'}">{datoHardcodedStrings.logger}</button>
         </div>
       </div>
       <!--Footer-->
@@ -115,14 +123,14 @@
         class="border border-gray-200 bg-gray-200 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
         on:click={closeModal}
         >
-          Cancel
+          {datoHardcodedStrings.cancel}
         </button>
         <button
           type="button"
           class="border border-blue-500 bg-blue-500 hover:border-blue-300 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline"
           on:click={createTheList}
         >
-          Create List
+          {datoHardcodedStrings.createList}
         </button>
       </div>
     </div>
