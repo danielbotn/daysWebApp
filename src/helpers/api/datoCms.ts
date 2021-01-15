@@ -70,6 +70,9 @@ export const getHardcodedStrings = async (): Promise<IHardcodedStrings> => {
 						emailError(locale: en)
 						lastnameError(locale: en)
 						firstnameError(locale: en)
+						termsOfService(locale: en)
+						and(locale: en)
+						privacyPolicy(locale: en)
 					}
 				}`,
 			}),
@@ -127,6 +130,9 @@ export const changeLangHardcodedStrings = async (lang: string): Promise<IHardcod
 						emailError(locale: ${newLang})
 						lastnameError(locale: ${newLang})
 						firstnameError(locale: ${newLang})
+						termsOfService(locale: ${newLang})
+						and(locale: ${newLang})
+						privacyPolicy(locale: ${newLang})
 					}
 				}`,
 			}),

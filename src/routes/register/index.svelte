@@ -146,19 +146,19 @@
             </button>
 
           <div class="text-center text-sm text-grey-dark mt-4">
-              By signing up, you agree to the 
+              {datoHardcodedStrings.registerTerms}
               <a class="no-underline border-b border-grey-dark text-grey-dark" href="http://stale-acoustics.surge.sh/privacy-policy/">
-                  Terms of Service
-              </a> and 
+                  {datoHardcodedStrings.termsOfService}
+              </a> {datoHardcodedStrings.and} 
               <a class="no-underline border-b border-grey-dark text-grey-dark" href="http://stale-acoustics.surge.sh/privacy-policy/">
-                  Privacy Policy
+                {datoHardcodedStrings.privacyPolicy}
               </a>
           </div>
       </div>
       <div class="text-center text-sm text-blue-500 mt-4">
-        Already have an account? 
+        {datoHardcodedStrings.alreadyHaveAccount}
         <a class="no-underline border-b border-grey-dark text-blue-500" href="/">
-            Log in
+            {datoHardcodedStrings.loginButton}
         </a>
       </div>
     </div>

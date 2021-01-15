@@ -24,6 +24,9 @@ export interface IHardcodedStrings {
   emailError: string;
   lastnameError: string;
   firstnameError: string;
+  termsOfService: string;
+  and: string;
+  privacyPolicy: string;
 }
 
 export interface ILanguage {
