@@ -12,16 +12,17 @@ export const getLanguages = async (): Promise<ILangFlag> => {
 				Authorization: `Bearer ${process.env.SAPPER_APP_DATO_CMS_API_KEY}`,
 			},
 			data: JSON.stringify({
-				query: `query MyQuery {
-									allLanguages {
-										language
-									}
-									languageFlagIcon {
-										icelandicFlagLink
-										swedishFlagLink
-										englishFlagLink
-									}
-								}
+				query: `query
+				LangQuery {
+					allLanguages {
+						language
+					}
+					languageFlagIcon {
+						icelandicFlagLink
+						swedishFlagLink
+						englishFlagLink
+					}
+				}
 				`,
 			}),
 		});
@@ -73,6 +74,7 @@ export const getHardcodedStrings = async (): Promise<IHardcodedStrings> => {
 						termsOfService(locale: en)
 						and(locale: en)
 						privacyPolicy(locale: en)
+						listnamePlaceholder(locale: en)
 					}
 				}`,
 			}),
@@ -133,6 +135,7 @@ export const changeLangHardcodedStrings = async (lang: string): Promise<IHardcod
 						termsOfService(locale: ${newLang})
 						and(locale: ${newLang})
 						privacyPolicy(locale: ${newLang})
+						listnamePlaceholder(locale: ${newLang})
 					}
 				}`,
 			}),

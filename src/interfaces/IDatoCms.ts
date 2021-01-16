@@ -27,6 +27,7 @@ export interface IHardcodedStrings {
   termsOfService: string;
   and: string;
   privacyPolicy: string;
+  listnamePlaceholder: string;
 }
 
 export interface ILanguage {

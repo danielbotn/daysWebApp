@@ -53,11 +53,6 @@
     animation-name: fadeIn;
   }
 
-  .fadeOut {
-    -webkit-animation-name: fadeOut;
-    animation-name: fadeOut;
-  }
-
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -67,17 +62,6 @@
       opacity: 1;
     }
   }
-
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-
-    to {
-      opacity: 0;
-    }
-  }
-
   input {
     @apply block border border-gray-200 w-full p-3 rounded mb-4;
   }
@@ -106,7 +90,7 @@
       <!--Body-->
       <div class="my-5">
         <h3 class="text-xl text-gray-700 mb-2 font-bold">{datoHardcodedStrings.createNewList}</h3>
-        <input type="text" name="create new list" placeholder="List Name"  bind:value="{listName}" />
+        <input type="text" name="create new list" placeholder={datoHardcodedStrings.listnamePlaceholder}  bind:value="{listName}" />
       </div>
       <div class="">
         <h3 class="text-xl text-gray-700 mb-2 font-bold">{datoHardcodedStrings.typeOfList}</h3>

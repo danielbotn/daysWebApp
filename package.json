@@ -14,7 +14,8 @@
     "start": "node __sapper__/build",
     "serve": "serve ___sapper__/export",
     "eslint": "eslint ./src/*.ts ./src/components/**/*.svelte ./src/routes/*.svelte",
-    "eslint:fix": "eslint --fix ./*.js ./src/*.ts ./src/components/**/*.svelte ./src/graphql/**/*.ts ./src/routes/**/*.svelte ./src/routes/**/*.ts"
+    "eslint:fix": "eslint --fix ./*.js ./src/*.ts ./src/components/**/*.svelte ./src/graphql/**/*.ts ./src/routes/**/*.svelte ./src/routes/**/*.ts",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -56,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "babel-eslint": "^10.1.0",
+    "cypress": "^6.2.1",
     "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
