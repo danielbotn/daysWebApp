@@ -3,3 +3,7 @@ export interface IError {
   code: string;
   message: string;
 }
+
+export interface IFireLanguage {
+  Language: string;
+}

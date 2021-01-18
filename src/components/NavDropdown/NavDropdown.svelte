@@ -1,15 +1,34 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { ILanguage, IFlagLinks } from '../../interfaces/IDatoCms';
+  import type { IFireLanguage } from "../../interfaces/IFirebase";
   import { getLanguages, changeLangHardcodedStrings } from '../../helpers/api/datoCms';
-  import { hardcodedStrings } from "../../../store";
+  import { hardcodedStrings, userID } from "../../../store";
+  import { getLanguage, updateFirebaseLanguage } from '../../helpers/api/firebase';
 
   let choosenLanguage :string = "english";
   let languages: ILanguage[] = [];
   let flags: IFlagLinks = null;
   let choosenFlag: string = null;
   let dropDownOpen: boolean = false;
+  let isUserLoggedIn: boolean = false;
+  let firebaseUid: string = null;
 
+  const initLanguage = async (uId: string) => {
+    const lang: IFireLanguage = await getLanguage(uId);
+    changeLanguage(lang.Language);
+  }
+  
+  userID.subscribe((value: string) => {
+    if (value !== null) {
+      isUserLoggedIn = true;
+      firebaseUid = value;
+      initLanguage(value);
+    } else {
+      isUserLoggedIn = false;
+    }
+  });
+  
 	onMount(async () => {
     try {
       const gl = await getLanguages();
@@ -24,7 +43,6 @@
 	});
 
   const changeLanguage = async (newLang: any) => {
-    console.log('change lang', newLang);
     if (newLang === 'English') {
       choosenFlag = flags.englishFlagLink;
     } else if (newLang === 'Íslenska') {
@@ -34,9 +52,11 @@
     }
     choosenLanguage = newLang;
     const updateHardcodedStrings = await changeLangHardcodedStrings(newLang);
-    console.log('updateHardcodedStrings', updateHardcodedStrings);
     hardcodedStrings.set(updateHardcodedStrings);
-    toogleDropdown();
+    dropDownOpen = false;
+    if (isUserLoggedIn && firebaseUid) {
+      updateFirebaseLanguage(firebaseUid, choosenLanguage);
+    }
   }
 
   const toogleDropdown = () => {

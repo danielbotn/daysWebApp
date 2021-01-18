@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/database";
 import { format } from "date-fns";
+import type { IFireLanguage } from "../../interfaces/IFirebase";
 
 const createBoardsList = (joined: string, UserId: string): void => {
 	const rand = Math.floor(Math.random() * 200) + 1;
@@ -110,5 +111,28 @@ export const createNewList = async (
 		TypeOfList: typeOfList,
 		WriteAccess: true,
 		ReadAccess: true,
+	});
+};
+
+export const getLanguage = (userId: string): Promise<any> => {
+	const langPromise = new Promise((resolve, reject) => {
+		const db = firebase.database();
+		const lc = db.ref(`/language/${userId}`);
+		lc.once("value").then((snapshot) => {
+			const langValue = snapshot.val();
+			if (langValue) {
+				resolve(langValue);
+			} else {
+				reject(langValue);
+			}
+		});
+	});
+	return langPromise;
+};
+
+export const updateFirebaseLanguage = (userId: string, lang: string): Promise<IFireLanguage> => {
+	const db = firebase.database();
+	return db.ref(`/language/${userId}`).update({
+		Language: lang,
 	});
 };
