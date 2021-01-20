@@ -1,14 +1,24 @@
 <script context="module">
-  export async function preload(page) {
-    const { id } = page.params;
+  export async function preload(page, session) {
+    const { id } = page.query;
     return { id }
   }
 
 </script>
 
 <script lang="ts">
-  export let job;
+  import SingleCalendar from '../../components/SingleCalendar/SingleCalendar.svelte';
+  import { userID } from '../../../store';
+
+  export let id: string;
+  let uId: string = '';
+ 
+  userID.subscribe((value: string) => {
+    if (value !== null) {
+      uId = value;
+    }
+  });
+  
 </script>
-<div>
-  <p>single list</p>
-</div>
+
+<SingleCalendar uId={uId} listId={id} />

@@ -1,7 +1,9 @@
+/* eslint-disable dot-notation */
+/* eslint-disable no-param-reassign */
 import firebase from "firebase/app";
 import "firebase/database";
 import { format } from "date-fns";
-import type { IFireLanguage } from "../../interfaces/IFirebase";
+import type { IFireLanguage, IFireBoard } from "../../interfaces/IFirebase";
 
 const createBoardsList = (joined: string, UserId: string): void => {
 	const rand = Math.floor(Math.random() * 200) + 1;
