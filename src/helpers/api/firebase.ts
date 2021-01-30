@@ -3,7 +3,12 @@
 import firebase from "firebase/app";
 import "firebase/database";
 import { format } from "date-fns";
-import type { IFireLanguage, IFireBoard } from "../../interfaces/IFirebase";
+import type {
+	IFireLanguage,
+	IFireNameObject,
+	IFireTotalLists,
+	IFireUserInfo,
+} from "../../interfaces/IFirebase";
 
 const createBoardsList = (joined: string, UserId: string): void => {
 	const rand = Math.floor(Math.random() * 200) + 1;
@@ -72,19 +77,21 @@ export const registerUserDataBase = (
 	createLanguage(UserId);
 };
 
-const getTotalListCounter = (userId: string): Promise<any> => {
-	const listCounterPromise = new Promise((resolve, reject) => {
-		const db = firebase.database();
-		const lc = db.ref(`/listCounter/${userId}`);
-		lc.once("value").then((snapshot) => {
-			const listCounter = snapshot.val();
-			if (listCounter) {
-				resolve(listCounter);
-			} else {
-				reject(listCounter);
-			}
-		});
-	});
+const getTotalListCounter = (userId: string): Promise<IFireTotalLists> => {
+	const listCounterPromise: Promise<IFireTotalLists> = new Promise(
+		(resolve, reject) => {
+			const db = firebase.database();
+			const lc = db.ref(`/listCounter/${userId}`);
+			lc.once("value").then((snapshot) => {
+				const listCounter = snapshot.val();
+				if (listCounter) {
+					resolve(listCounter);
+				} else {
+					reject(listCounter);
+				}
+			});
+		},
+	);
 	return listCounterPromise;
 };
 
@@ -101,7 +108,7 @@ export const createNewList = async (
 	userId: string,
 ): Promise<unknown> => {
 	const listCounter = await getTotalListCounter(userId);
-	const listCounterPlusOne = listCounter.TotalLists + 1;
+	const listCounterPlusOne: number = listCounter.TotalLists + 1;
 	updateListCounter(listCounterPlusOne, userId);
 	const rand = Math.floor(Math.random() * 200) + 1;
 	const db = firebase.database();
@@ -116,8 +123,8 @@ export const createNewList = async (
 	});
 };
 
-export const getLanguage = (userId: string): Promise<any> => {
-	const langPromise = new Promise((resolve, reject) => {
+export const getLanguage = (userId: string): Promise<IFireLanguage> => {
+	const langPromise: Promise<IFireLanguage> = new Promise((resolve, reject) => {
 		const db = firebase.database();
 		const lc = db.ref(`/language/${userId}`);
 		lc.once("value").then((snapshot) => {
@@ -132,9 +139,83 @@ export const getLanguage = (userId: string): Promise<any> => {
 	return langPromise;
 };
 
-export const updateFirebaseLanguage = (userId: string, lang: string): Promise<IFireLanguage> => {
+export const updateFirebaseLanguage = (
+	userId: string,
+	lang: string,
+): Promise<IFireLanguage> => {
 	const db = firebase.database();
 	return db.ref(`/language/${userId}`).update({
 		Language: lang,
 	});
+};
+
+export const getNameOfUserThatChecked = (
+	userId: string,
+): Promise<IFireNameObject> => {
+	const fPromise: Promise<IFireNameObject> = new Promise((resolve, reject) => {
+		const db = firebase.database();
+		const query = db.ref(`/users/${userId}`);
+		query.once("value").then((snapshot) => {
+			const username = snapshot.val() || "Anonymous";
+			if (username !== "Anonymous") {
+				const tmp = {
+					firstName: username.FirstName,
+					lastName: username.LastName,
+				};
+				resolve(tmp);
+			} else {
+				const err = "Error";
+				reject(err);
+			}
+		});
+	});
+	return fPromise;
+};
+
+export const setBoardData = (
+	userId: string,
+	listId: string,
+	day: string,
+	nameObject: IFireNameObject,
+	email: string,
+	time: string,
+): void => {
+	const db = firebase.database();
+	db.ref(`/boardsData/${userId}/${listId}`).push({
+		Day: day,
+		DayTrueOrFalse: true,
+		UserId: userId,
+		ListId: listId,
+		EmailWhoChecked: email,
+		FirstNameWhoChecked: nameObject.firstName,
+		LastNameWhoChecked: nameObject.lastName,
+		Time: time,
+	});
+};
+
+export const deleteBoardItem = (
+	userId: string,
+	listId: string,
+	boardId: string,
+): void => {
+	const db = firebase.database();
+	db.ref(`/boardsData/${userId}/${listId}/${boardId}`).remove();
+};
+
+export const getUserInfo = (userId: string): Promise<IFireUserInfo> => {
+	const userInfoPromise: Promise<IFireUserInfo> = new Promise(
+		(resolve, reject) => {
+			const db = firebase.database();
+			const lc = db.ref(`/users/${userId}`);
+			lc.once("value").then((snapshot) => {
+				const userInfo = snapshot.val();
+				if (userInfo) {
+					resolve(userInfo);
+				} else {
+					reject(userInfo);
+				}
+			});
+		},
+	);
+	return userInfoPromise;
 };

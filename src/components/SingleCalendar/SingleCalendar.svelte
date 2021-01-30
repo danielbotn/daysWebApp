@@ -1,14 +1,52 @@
 <script lang="ts">
   import FullCalendar from 'svelte-fullcalendar';
   import { beforeUpdate, onMount } from 'svelte';
-  import type { IFireBoard, IFireBoardObject } from "../../interfaces/IFirebase";
+  import { getNameOfUserThatChecked, getUserInfo, setBoardData, deleteBoardItem } from '../../helpers/api/firebase';
+  import type { IFireBoard, IFireBoardObject, IFireNameObject } from "../../interfaces/IFirebase";
   import firebase from "firebase/app";
   import "firebase/database";
+  import { userID } from '../../../store';
 
   export let uId: string;
   export let listId: string;
 
   let boardData: IFireBoard[];
+
+  const formatAMPM = (date: any) => {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours %= 12;
+    hours = hours || 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    const strTime = `${hours}:${minutes} ${ampm}`;
+    return strTime;
+  };
+
+  const findDay = (day: string) => {
+    let result: IFireBoard = undefined;
+    for (let i = 0; i < boardData.length; i++) {
+      if (day === boardData[i].Day) {
+        result = boardData[i];
+        break;
+      }
+    }
+    return result;
+  }
+
+  const clickOnDate = async (date: string) => {
+    const ct = formatAMPM(new Date());
+    const nameObject: IFireNameObject = await getNameOfUserThatChecked(uId);
+    const userInfo = await getUserInfo(uId);
+    const isDayChecked = findDay(date);
+    if (isDayChecked === undefined) {
+      // Put day into database
+      setBoardData(uId, listId, date, nameObject, userInfo.Email, ct);
+    } else {
+      // We need to delete from database
+      deleteBoardItem(uId, listId, isDayChecked.KeyId);
+    }
+  }
 
   const returnEvents = () => {
     const result = [];
@@ -27,7 +65,7 @@
     contentHeight: 100,
     events: returnEvents(),
     eventColor: 'white',
-    dateClick: (event) => alert('date click! ' + event.dateStr),
+    dateClick: (event: any) => clickOnDate(event.dateStr),
     weekends: true
   };
 

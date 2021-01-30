@@ -22,3 +22,20 @@ export interface IFireBoard {
 export interface IFireBoardObject {
   [key: string]: IFireBoard
 }
+
+export interface IFireNameObject {
+  firstName: string;
+  lastName: string;
+}
+
+export interface IFireTotalLists {
+  TotalLists: number;
+}
+
+export interface IFireUserInfo {
+  Email: string;
+  FirstName: string;
+  Joined: string;
+  LastName: string;
+  UserId: string;
+}
