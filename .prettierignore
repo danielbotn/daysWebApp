@@ -1,0 +1,15 @@
+__sapper__
+static
+.vscode
+rollup.config.js
+postcss.config.js
+store.js
+eslint.json
+README.md
+svelte.config.js
+tailwind.config.js
+tsconfig.json
+.eslintrc.json
+.prettierrc.json
+package-lock.json
+package.json
