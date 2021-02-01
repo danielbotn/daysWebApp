@@ -75,6 +75,11 @@ export const getHardcodedStrings = async (): Promise<IHardcodedStrings> => {
 						and(locale: en)
 						privacyPolicy(locale: en)
 						listnamePlaceholder(locale: en)
+						information(locale: en)
+						day(locale: en)
+						time(locale: en)
+						checkedBy(locale: en)
+						email(locale: en)
 					}
 				}`,
 			}),
@@ -136,6 +141,11 @@ export const changeLangHardcodedStrings = async (lang: string): Promise<IHardcod
 						and(locale: ${newLang})
 						privacyPolicy(locale: ${newLang})
 						listnamePlaceholder(locale: ${newLang})
+						information(locale: ${newLang})
+						day(locale: ${newLang})
+						time(locale: ${newLang})
+						checkedBy(locale: ${newLang})
+						email(locale: ${newLang})
 					}
 				}`,
 			}),

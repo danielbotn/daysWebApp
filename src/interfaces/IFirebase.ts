@@ -14,6 +14,7 @@ export interface IFireBoard {
   EmailWhoChecked: string;
   KeyId: string;
   LastNameWhoChecked: string;
+  FirstNameWhoChecked: string;
   ListId: string;
   Time: string;
   UserId: string;
@@ -38,4 +39,14 @@ export interface IFireUserInfo {
   Joined: string;
   LastName: string;
   UserId: string;
+}
+
+export interface IFireBoardInfo {
+  Avatar: string;
+  ListCreated: string;
+  NameOfList: string;
+  ReadAccess: boolean;
+  TypeOfList: string;
+  UserId: string;
+  WriteAccess: boolean;
 }

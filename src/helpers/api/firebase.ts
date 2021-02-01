@@ -8,6 +8,7 @@ import type {
 	IFireNameObject,
 	IFireTotalLists,
 	IFireUserInfo,
+	IFireBoardInfo,
 } from "../../interfaces/IFirebase";
 
 const createBoardsList = (joined: string, UserId: string): void => {
@@ -218,4 +219,22 @@ export const getUserInfo = (userId: string): Promise<IFireUserInfo> => {
 		},
 	);
 	return userInfoPromise;
+};
+
+export const getBoardInfo = (userId: string, listId: string): Promise<IFireBoardInfo> => {
+	const boardInfoPromise: Promise<IFireBoardInfo> = new Promise(
+		(resolve, reject) => {
+			const db = firebase.database();
+			const lc = db.ref(`/boards/${userId}/${listId}`);
+			lc.once("value").then((snapshot) => {
+				const board = snapshot.val();
+				if (board) {
+					resolve(board);
+				} else {
+					reject(board);
+				}
+			});
+		},
+	);
+	return boardInfoPromise;
 };

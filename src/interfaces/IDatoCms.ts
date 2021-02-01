@@ -28,6 +28,11 @@ export interface IHardcodedStrings {
   and: string;
   privacyPolicy: string;
   listnamePlaceholder: string;
+  information: string;
+  day: string;
+  time: string;
+  checkedBy: string;
+  email: string;
 }
 
 export interface ILanguage {

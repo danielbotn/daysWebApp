@@ -1,17 +1,31 @@
 <script lang="ts">
-  import FullCalendar from 'svelte-fullcalendar';
-  import { beforeUpdate, onMount } from 'svelte';
-  import { getNameOfUserThatChecked, getUserInfo, setBoardData, deleteBoardItem } from '../../helpers/api/firebase';
-  import type { IFireBoard, IFireBoardObject, IFireNameObject } from "../../interfaces/IFirebase";
+  import FullCalendar from "svelte-fullcalendar";
+  import SingleInfoModal from '../SingleInfoModal/SingleInfoModal.svelte';
+  import { beforeUpdate, onMount } from "svelte";
+  import {
+    getNameOfUserThatChecked,
+    getUserInfo,
+    setBoardData,
+    deleteBoardItem,
+  } from "../../helpers/api/firebase";
+  import type {
+    IFireBoard,
+    IFireBoardObject,
+    IFireNameObject,
+  } from "../../interfaces/IFirebase";
+  import type { IEventObject, IInfo } from '../../interfaces/IOther'
   import firebase from "firebase/app";
   import "firebase/database";
-  import { userID } from '../../../store';
+  import randomColor from 'randomcolor';
 
   export let uId: string;
   export let listId: string;
+  export let boardName: string;
 
   let boardData: IFireBoard[];
-
+  let infoModalOpen: boolean = false;
+  let infoModalObject: IInfo = null;
+  
   const formatAMPM = (date: any) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -52,10 +66,30 @@
     const result = [];
     if (boardData) {
       boardData.forEach(element => {
-        result.push({title: '✔️', date: element.Day})
+        result.push({
+          title: '✔️', 
+          date: element.Day, 
+          id: element.KeyId, 
+          firstName: element.FirstNameWhoChecked,
+          lastName: element.LastNameWhoChecked,
+          time: element.Time,
+          listId: element.ListId,
+          email: element.EmailWhoChecked,
+          color: randomColor(),
+          day: element.Day
+        })
       });
     }
     return result;
+  }
+
+  const eventClick = (event: IEventObject) => {
+    infoModalOpen = true;
+    infoModalObject = event.extendedProps
+  }
+
+  const closeModal = () => {
+    infoModalOpen = !infoModalOpen;
   }
 
   let options = { 
@@ -64,9 +98,9 @@
     height: '500px', 
     contentHeight: 100,
     events: returnEvents(),
-    eventColor: 'white',
     dateClick: (event: any) => clickOnDate(event.dateStr),
-    weekends: true
+    weekends: true,
+    eventClick: (event: any) => eventClick(event.event._def),
   };
 
 	onMount(async () => {
@@ -95,8 +129,14 @@
       });
     }
   })
-
 </script>
-<div>
+<div class="justify-self-center">
+  {#if boardName}
+    <h1 class="font-semibold tracking-wide uppercase text-4xl text-center">{boardName}</h1>
+  {/if}
   <FullCalendar {options} />
 </div>
+
+{#if infoModalOpen}
+  <SingleInfoModal on:closeModal={closeModal} infoModalObject={infoModalObject} />
+{/if}
