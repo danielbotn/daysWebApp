@@ -57,23 +57,19 @@
         type="text"
         name="Email"
         placeholder="{datoHardcodedStrings.emailPlaceholder}"
-        id="email"
-        autocomplete="off"
         bind:value="{email}"
       />
       <label for="Password">{datoHardcodedStrings.passwordPlaceholder}</label>
       <input
         type="password"
         name="Password"
-        id="password"
         placeholder="{datoHardcodedStrings.passwordPlaceholder}"
-        autocomplete="new-password"
         bind:value="{password}"
       />
       {#if !invalidAuthentication}
         <p class="text-red-500 text-xs italic">{invalidMessage}</p>
       {/if}
-      <button on:click="{login}">
+      <button on:click="{login}" id="loginButton">
         {#if loginPressed}
           <Spinner />
         {/if}

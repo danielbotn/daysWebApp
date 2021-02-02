@@ -5,3 +5,4 @@ yarn-error.log
 /__sapper__/build
 /__sapper__/dev
 .env
+cypress.env.json
