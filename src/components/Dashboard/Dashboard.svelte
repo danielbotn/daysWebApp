@@ -4,6 +4,7 @@
   import firebase from "firebase/app";
   import "firebase/database";
   import { onMount } from "svelte";
+  import { goto } from "@sapper/app";
   import { userID, hardcodedStrings } from "../../../store";
   import type { IBoard } from "../../interfaces/IBoard";
   import type { IHardcodedStrings } from "../../interfaces/IDatoCms";
@@ -52,6 +53,11 @@
     let route = item.TypeOfList;
     return `${route}?id=${item.KeyId}`;
   };
+
+  const imageClick = (item: IBoard) => {
+    let route = item.TypeOfList;
+    goto(`${route}?id=${item.KeyId}`);
+  };
 </script>
 
 <section class="py-12">
@@ -67,6 +73,7 @@
               class="flex-none w-8 mr-2 rounded"
               src="{item.Avatar}"
               alt="{`Icon related with ${item.NameOfList}`}"
+              on:click="{() => imageClick(item)}"
             />
             <a href="{returnPath(item)}">{item.NameOfList}</a>
           </li>

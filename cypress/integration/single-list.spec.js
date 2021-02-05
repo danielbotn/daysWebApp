@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import { getDay, getMonth, getYear } from "../helpers/helperFunctions";
+
 Cypress.on(
   "uncaught:exception",
   () =>
@@ -19,7 +21,7 @@ describe("Visits localhost 3000", () => {
   });
 });
 
-describe("Should Log the user into the system", () => {
+describe("Should Log the user into the system and click on Nota Tannþráð", () => {
   it("Writes username and password into inputs and clicks login button", () => {
     cy.get('input[type="text"]').type(Cypress.env("CYPRESS_USER_ONE"));
     cy.get('input[type="password"]').type(Cypress.env("CYPRESS_PASSWORD_ONE"));
@@ -34,16 +36,21 @@ describe("Should Log the user into the system", () => {
     cy.get(Cypress.env("CYPRESS_NOTA_TANNTRAD")).contains("Nota tannþráð");
     cy.get(".p-0").should("not.be.disabled");
   });
-  it("Checks if the logo appears", () => {
-    cy.get('a[href*="/"]').then(($image) => {
-      const logo = $image[0].children[0].alt;
-      expect(logo).to.eq("logo");
-    });
-  });
-  it("Checks if logout button appears", () => {
-    cy.get(".px-6").then(($logout) => {
-      const logout = $logout[0].outerText;
-      expect(logout).to.eq("Logout");
+  it("Clicks on Nota tannþráð list and checks two plus days", () => {
+    const fullDate = `${getYear()}-${getMonth()}-${getDay()}`;
+    cy.get('img[src="https://picsum.photos/id/182/200/300"]').then(($image) => {
+      $image[0].click();
+      cy.wait(8000);
+      cy.get("h1").contains("Nota tannþráð").should("be.visible");
+      cy.get(`td[data-date="${fullDate}"]`).click();
+      // Check if the event was clicked
+      cy.get(`td[data-date="${fullDate}"]`)
+        .children()
+        .children()
+        .first()
+        .siblings()
+        .first()
+        .should("have.class", "fc-daygrid-day-events");
     });
   });
 });

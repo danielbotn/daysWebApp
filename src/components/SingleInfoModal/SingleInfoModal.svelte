@@ -142,15 +142,4 @@
       opacity: 1;
     }
   }
-  input {
-    @apply block border border-gray-200 w-full p-3 rounded mb-4;
-  }
-
-  .selected {
-    @apply rounded-r-none hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded cursor-pointer hover:bg-gray-200 bg-blue-500 text-white border duration-200 ease-in-out border-gray-200 transition;
-  }
-
-  .notSelected {
-    @apply rounded-r-none hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded cursor-pointer hover:bg-gray-200 bg-white text-gray-700 border duration-200 ease-in-out border-gray-200 transition;
-  }
 </style>

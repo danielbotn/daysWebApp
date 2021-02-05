@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as EmailValidator from "email-validator";
+  import { validate } from "email-validator";
   import { registerUserDataBase } from "../../helpers/api/firebase";
   import firebase from "firebase/app";
   import "firebase/database";
@@ -41,7 +41,7 @@
     } else {
       lastNameError = false;
     }
-    if (email === "" || !EmailValidator.validate(email)) {
+    if (email === "" || !validate(email)) {
       emailError = true;
       result = true;
     } else {
