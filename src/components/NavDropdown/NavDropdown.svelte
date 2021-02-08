@@ -6,7 +6,7 @@
     getLanguages,
     changeLangHardcodedStrings,
   } from "../../helpers/api/datoCms";
-  import { hardcodedStrings, userID } from "../../../store";
+  import { hardcodedStrings, userID, language } from "../../../store";
   import {
     getLanguage,
     updateFirebaseLanguage,
@@ -57,6 +57,7 @@
       choosenFlag = flags.swedishFlagLink;
     }
     choosenLanguage = newLang;
+    language.set(newLang);
     const updateHardcodedStrings = await changeLangHardcodedStrings(newLang);
     hardcodedStrings.set(updateHardcodedStrings);
     dropDownOpen = false;
