@@ -5,9 +5,18 @@
 </script>
 
 <script lang="ts">
-  export let id;
+  import MultipleCalendar from '../../components/MultipleCalendar/MultipleCalendar.svelte';
+  import { userID, language } from "../../../store";
+
+  export let id: string;
+
+  let lang: string = '';
+
+  language.subscribe((value: string) => {
+    if (value !== null) {
+      lang = value;
+    }
+  });
 </script>
 
-<div>
-  <p>multiple list</p>
-</div>
+<MultipleCalendar listId={id} language={lang} />
