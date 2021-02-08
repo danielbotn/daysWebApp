@@ -13,7 +13,7 @@
   export let id: string;
   let uId: string = "";
   let boardName: string = null;
-  let lang: string = '';
+  let lang: string = "";
 
   const setBoardName = async () => {
     if (!boardName) {
@@ -37,5 +37,10 @@
 </script>
 
 {#if uId && id && boardName}
-  <SingleCalendar uId="{uId}" listId="{id}" boardName="{boardName}" language={lang} />
+  <SingleCalendar
+    uId="{uId}"
+    listId="{id}"
+    boardName="{boardName}"
+    language="{lang}"
+  />
 {/if}

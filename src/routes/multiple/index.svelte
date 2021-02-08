@@ -5,12 +5,12 @@
 </script>
 
 <script lang="ts">
-  import MultipleCalendar from '../../components/MultipleCalendar/MultipleCalendar.svelte';
+  import MultipleCalendar from "../../components/MultipleCalendar/MultipleCalendar.svelte";
   import { userID, language } from "../../../store";
 
   export let id: string;
 
-  let lang: string = '';
+  let lang: string = "";
 
   language.subscribe((value: string) => {
     if (value !== null) {
@@ -19,4 +19,4 @@
   });
 </script>
 
-<MultipleCalendar listId={id} language={lang} />
+<MultipleCalendar listId="{id}" language="{lang}" />

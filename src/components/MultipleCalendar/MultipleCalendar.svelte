@@ -4,47 +4,48 @@
     return { id };
   }
 </script>
+
 <script lang="ts">
   import FullCalendar from "svelte-fullcalendar";
   import { onMount } from "svelte";
 
   let locales = [];
-  let locale: string = 'en';
+  let locale: string = "en";
 
   export let listId: string;
   export let language: string;
 
   const setLang = (lang: string) => {
-    let result: string = '';
-    if (lang === 'Íslenska') {
-      result = 'is';
-    } else if (lang === 'English') {
-      result = 'en';
+    let result: string = "";
+    if (lang === "Íslenska") {
+      result = "is";
+    } else if (lang === "English") {
+      result = "en";
     } else {
-      result = 'sv';
+      result = "sv";
     }
     return result;
-  }
+  };
 
   onMount(async () => {
-    locales.push((await import('@fullcalendar/core/locales/sv')).default)
-    locales.push((await import('@fullcalendar/core/locales/is')).default)
+    locales.push((await import("@fullcalendar/core/locales/sv")).default);
+    locales.push((await import("@fullcalendar/core/locales/is")).default);
     options = {
       ...options,
       plugins: [
-          (await import('@fullcalendar/daygrid')).default,
-          (await import('@fullcalendar/interaction')).default
+        (await import("@fullcalendar/daygrid")).default,
+        (await import("@fullcalendar/interaction")).default,
       ],
       locales,
-      locale: setLang(language)
+      locale: setLang(language),
     };
   });
 
   const returnEvents = () => {
     return null;
-  }
+  };
 
-  const clickOnDate = (date: string) => {}
+  const clickOnDate = (date: string) => {};
 
   let options = {
     initialView: "dayGridMonth",

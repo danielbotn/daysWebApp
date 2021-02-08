@@ -27,7 +27,7 @@
   let infoModalOpen: boolean = false;
   let infoModalObject: IInfo = null;
   let locales = [];
-  let locale: string = 'en';
+  let locale: string = "en";
 
   const formatAMPM = (date: any) => {
     let hours = date.getHours();
@@ -96,16 +96,16 @@
   };
 
   const setLang = (lang: string) => {
-    let result: string = '';
-    if (lang === 'Íslenska') {
-      result = 'is';
-    } else if (lang === 'English') {
-      result = 'en';
+    let result: string = "";
+    if (lang === "Íslenska") {
+      result = "is";
+    } else if (lang === "English") {
+      result = "en";
     } else {
-      result = 'sv';
+      result = "sv";
     }
     return result;
-  }
+  };
 
   let options = {
     initialView: "dayGridMonth",
@@ -121,19 +121,18 @@
   };
 
   onMount(async () => {
-    locales.push((await import('@fullcalendar/core/locales/sv')).default)
-    locales.push((await import('@fullcalendar/core/locales/is')).default)
+    locales.push((await import("@fullcalendar/core/locales/sv")).default);
+    locales.push((await import("@fullcalendar/core/locales/is")).default);
     options = {
-        ...options,
-        plugins: [
-            (await import('@fullcalendar/daygrid')).default,
-            (await import('@fullcalendar/interaction')).default
-        ],
-        locales,
-        locale: setLang(language)
+      ...options,
+      plugins: [
+        (await import("@fullcalendar/daygrid")).default,
+        (await import("@fullcalendar/interaction")).default,
+      ],
+      locales,
+      locale: setLang(language),
     };
   });
-
 
   beforeUpdate(() => {
     if (uId && listId) {
@@ -149,7 +148,7 @@
         if (boardArr) {
           boardData = boardArr;
           options.events = returnEvents();
-          options.locale = setLang(language)
+          options.locale = setLang(language);
           options = { ...options };
         }
       });
