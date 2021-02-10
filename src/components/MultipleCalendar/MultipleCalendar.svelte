@@ -29,7 +29,7 @@
   let boardData: IFireMultiDay[] = [];
   let eventArray: IFireMultiDay[] = [];
   let modalOpen: boolean = false;
-  let selectedDay: string = '';
+  let selectedDay: string = "";
 
   const setLang = (lang: string) => {
     let result: string = "";
@@ -137,8 +137,8 @@
     on:closeModal="{() => (modalOpen = !modalOpen)}"
     fields="{fields}"
     boardName="{boardName}"
-    boardData={boardData}
-    selectedDay={selectedDay}
-    listId={listId}
+    boardData="{boardData}"
+    selectedDay="{selectedDay}"
+    listId="{listId}"
   />
 {/if}

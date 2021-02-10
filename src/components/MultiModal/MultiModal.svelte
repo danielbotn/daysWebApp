@@ -1,7 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { userID, hardcodedStrings } from "../../../store";
-  import { deleteMultiBoardData, addMultiBoardData } from "../../helpers/api/firebase";
+  import {
+    deleteMultiBoardData,
+    addMultiBoardData,
+  } from "../../helpers/api/firebase";
   import type { IHardcodedStrings } from "../../interfaces/IDatoCms";
   import type { IFireName, IFireMultiDay } from "../../interfaces/IFirebase";
   import type { ISelectedToggle } from "../../interfaces/IOther";
@@ -14,7 +17,7 @@
   export let fields: IFireName[] = [];
   export let boardName: string;
   export let boardData: IFireMultiDay[] = [];
-  export let selectedDay: string = '';
+  export let selectedDay: string = "";
   export let listId: string;
 
   userID.subscribe((value) => {
@@ -34,25 +37,28 @@
     dispatch("closeModal");
   };
 
-  const  dedupe = (arr: ISelectedToggle[]) => {
+  const dedupe = (arr: ISelectedToggle[]) => {
     const rv = arr.reverse();
-    return rv.reduce(function(p, c) {
-      // create an identifying id from the object values
-      var id = [c.keyId].join('|');
-      // if the id is not found in the temp array
-      // add the object to the output array
-      // and add the key to the temp array
-      if (p.temp.indexOf(id) === -1) {
-        p.out.push(c);
-        p.temp.push(id);
+    return rv.reduce(
+      function (p, c) {
+        // create an identifying id from the object values
+        var id = [c.keyId].join("|");
+        // if the id is not found in the temp array
+        // add the object to the output array
+        // and add the key to the temp array
+        if (p.temp.indexOf(id) === -1) {
+          p.out.push(c);
+          p.temp.push(id);
+        }
+        return p;
+        // return the deduped array
+      },
+      {
+        temp: [],
+        out: [],
       }
-      return p;
-      // return the deduped array
-    }, {
-      temp: [],
-      out: []
-    }).out;
-  }
+    ).out;
+  };
 
   const update = async () => {
     const removeDuplicates: ISelectedToggle[] = dedupe(selectedToggle);
@@ -65,7 +71,7 @@
         // Remove from database
         deleteMultiBoardData(item, firebaseUID, listId);
       }
-    })
+    });
     closeModal();
   };
 
@@ -78,18 +84,17 @@
       }
     }
     return result;
-  }
+  };
   const toggleCheckbox = (field: IFireName, e: any) => {
-    selectedToggle.push({ 
+    selectedToggle.push({
       name: field.Name,
       keyId: field.KeyId,
       selectedDay,
       toogle: e.checked,
       timeStamp: new Date(),
-      index: selectedToggle.length
+      index: selectedToggle.length,
     });
-    
-  }
+  };
 </script>
 
 <div
@@ -102,7 +107,7 @@
     <div class="modal-content py-4 text-left px-6">
       <!--Title-->
       <div class="flex justify-end">
-        <div class="modal-close cursor-pointer z-50" on:click={closeModal}>
+        <div class="modal-close cursor-pointer z-50" on:click="{closeModal}">
           <svg
             class="fill-current text-black"
             xmlns="http://www.w3.org/2000/svg"
@@ -131,12 +136,12 @@
               <div class="flex items-start">
                 <div class="flex items-center h-5">
                   <input
-                    id={field.Name}
-                    name={field.Name}
+                    id="{field.Name}"
+                    name="{field.Name}"
                     type="checkbox"
                     class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                    checked={fieldChecked(field)}
-                    on:change={(e) => toggleCheckbox(field, e.target)}
+                    checked="{fieldChecked(field)}"
+                    on:change="{(e) => toggleCheckbox(field, e.target)}"
                   />
                 </div>
                 <div class="ml-3 text-sm">

@@ -8,7 +8,7 @@
     setBoardData,
     deleteBoardItem,
   } from "../../helpers/api/firebase";
-  import { formatAMPM } from "../../helpers/helperFunctions/helperFunctions"
+  import { formatAMPM } from "../../helpers/helperFunctions/helperFunctions";
   import type {
     IFireBoard,
     IFireBoardObject,
