@@ -34,3 +34,12 @@ export interface IInfo {
   email: string;
   day: string;
 }
+
+export interface ISelectedToggle {
+  name: string;
+  keyId: string;
+  selectedDay: string;
+  toogle: boolean;
+  timeStamp: Date;
+  index: number;
+}

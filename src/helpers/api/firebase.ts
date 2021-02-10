@@ -10,6 +10,8 @@ import type {
 	IFireUserInfo,
 	IFireBoardInfo,
 } from "../../interfaces/IFirebase";
+import { formatAMPM } from "../helperFunctions/helperFunctions"
+import type { ISelectedToggle } from "../../interfaces/IOther";
 
 const createBoardsList = (joined: string, UserId: string): void => {
 	const rand = Math.floor(Math.random() * 200) + 1;
@@ -238,3 +240,32 @@ export const getBoardInfo = (userId: string, listId: string): Promise<IFireBoard
 	);
 	return boardInfoPromise;
 };
+
+export const deleteMultiBoardData = (data: ISelectedToggle, userId: string, listId: string): void => {
+	const db = firebase.database();
+	db.ref(
+		`/multipleBoardsData/${userId}/${listId}/${data.selectedDay}/${data.keyId}`,
+	).remove();
+}
+
+export const addMultiBoardData = async (data: ISelectedToggle, userId: string, listId: string, boardName: string): Promise<void> => {
+	const userInfo = await getUserInfo(userId);
+	const ct = formatAMPM(new Date());
+	const db = firebase.database();
+	db.ref(
+		`/multipleBoardsData/${userId}/${listId}/${data.selectedDay}/${data.keyId}`,
+	).push({
+		Day: data.selectedDay,
+		DayTrueOrFalse: true,
+		UserId: userId,
+		ListId: listId,
+		NameOfList: boardName,
+		TypeOfList: "multiple",
+		NameOfField: data.name,
+		FieldId: data.keyId,
+		Time: ct,
+		EmailWhoChecked: userInfo.Email,
+		FirstNameWhoChecked: userInfo.FirstName,
+		LastNameWhoChecked: userInfo.LastName,
+	});
+}

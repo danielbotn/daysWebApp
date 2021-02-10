@@ -33,6 +33,7 @@ export interface IHardcodedStrings {
   time: string;
   checkedBy: string;
   email: string;
+  save: string;
 }
 
 export interface ILanguage {

@@ -50,3 +50,27 @@ export interface IFireBoardInfo {
   UserId: string;
   WriteAccess: boolean;
 }
+
+export interface IFireName {
+  Name: string;
+  KeyId: string;
+}
+
+export interface IFireFieldObject {
+  [key: string]: IFireName
+}
+
+export interface IFireMultiDay {
+  Day: string;
+  DayTrueOrFalse: boolean;
+  EmailWhoChecked: string;
+  FieldId: string;
+  FirstNameWhoChecked: string;
+  LastNameWhoChecked: string;
+  ListId: string;
+  NameOfField: string;
+  NameOfList: string;
+  Time: string;
+  TypeOfList: string;
+  UserId: string;
+}

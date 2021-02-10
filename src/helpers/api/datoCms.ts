@@ -80,6 +80,7 @@ export const getHardcodedStrings = async (): Promise<IHardcodedStrings> => {
 						time(locale: en)
 						checkedBy(locale: en)
 						email(locale: en)
+						save(locale: en)
 					}
 				}`,
 			}),
@@ -146,6 +147,7 @@ export const changeLangHardcodedStrings = async (lang: string): Promise<IHardcod
 						time(locale: ${newLang})
 						checkedBy(locale: ${newLang})
 						email(locale: ${newLang})
+						save(locale: ${newLang})
 					}
 				}`,
 			}),

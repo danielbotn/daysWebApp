@@ -1,5 +1,5 @@
 <script context="module">
-  export async function preload(page, session) {
+  export async function preload(page) {
     const { id } = page.query;
     return { id };
   }
@@ -7,13 +7,29 @@
 
 <script lang="ts">
   import FullCalendar from "svelte-fullcalendar";
-  import { onMount } from "svelte";
-
-  let locales = [];
-  let locale: string = "en";
+  import MultiModal from "../MultiModal/MultiModal.svelte";
+  import firebase from "firebase/app";
+  import randomColor from "randomcolor";
+  import "firebase/database";
+  import { onMount, beforeUpdate } from "svelte";
+  import type {
+    IFireFieldObject,
+    IFireName,
+    IFireMultiDay,
+  } from "../../interfaces/IFirebase";
 
   export let listId: string;
   export let language: string;
+  export let uId: string;
+  export let boardName: string;
+
+  let locales = [];
+  let locale: string = "en";
+  let fields: IFireName[] = [];
+  let boardData: IFireMultiDay[] = [];
+  let eventArray: IFireMultiDay[] = [];
+  let modalOpen: boolean = false;
+  let selectedDay: string = '';
 
   const setLang = (lang: string) => {
     let result: string = "";
@@ -41,18 +57,64 @@
     };
   });
 
-  const returnEvents = () => {
-    return null;
+  const makeEventArray = (boardsData: any) => {
+    let result = [];
+    boardsData.forEach((element: IFireMultiDay) => {
+      result.push({
+        title: element.NameOfField + "✔️",
+        date: element.Day,
+        color: randomColor({ luminosity: "light" }),
+        textColor: "black",
+      });
+    });
+    eventArray = result;
+    options.events = eventArray;
+    options = { ...options };
   };
 
-  const clickOnDate = (date: string) => {};
+  beforeUpdate(() => {
+    if (uId && listId) {
+      let days: IFireMultiDay[] = [];
+      const db = firebase.database();
+      const lc = db.ref(`/multipleBoardsData/${uId}/${listId}`);
+      const fs = db.ref(`/multipleBoards/${uId}/${listId}`);
+      lc.on("value", (snapshot) => {
+        const boardValue = snapshot.val();
+        const boardArr = Object.values(boardValue);
+        boardArr.forEach((item) => {
+          const objects = Object.values(item);
+          objects.forEach((obj) => {
+            const ob: IFireMultiDay[] = Object.values(obj);
+            days.push(ob[0]);
+          });
+        });
+        boardData = days;
+        makeEventArray(boardData);
+      });
+      fs.on("value", (snapshot) => {
+        const fieldsValue: IFireFieldObject = snapshot.val();
+        const fieldsArr: IFireName[] = Object.values(fieldsValue);
+        const objectKeys = Object.keys(fieldsValue);
+        fieldsArr.forEach((item, index) => {
+          item["KeyId"] = objectKeys[index];
+        });
+        fields = fieldsArr;
+        makeEventArray(boardData);
+      });
+    }
+  });
+
+  const clickOnDate = (date: string) => {
+    modalOpen = true;
+    selectedDay = date;
+  };
 
   let options = {
     initialView: "dayGridMonth",
     plugins: [],
     height: "500px",
     contentHeight: 100,
-    events: returnEvents(),
+    events: eventArray,
     dateClick: (event: any) => clickOnDate(event.dateStr),
     weekends: true,
     // eventClick: (event: any) => eventClick(event.event._def),
@@ -61,4 +123,22 @@
   };
 </script>
 
-<FullCalendar options="{options}" />
+<div class="justify-self-center">
+  {#if boardName}
+    <h1 class="font-semibold tracking-wide uppercase text-4xl text-center">
+      {boardName}
+    </h1>
+  {/if}
+  <FullCalendar options="{options}" />
+</div>
+
+{#if modalOpen}
+  <MultiModal
+    on:closeModal="{() => (modalOpen = !modalOpen)}"
+    fields="{fields}"
+    boardName="{boardName}"
+    boardData={boardData}
+    selectedDay={selectedDay}
+    listId={listId}
+  />
+{/if}
