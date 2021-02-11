@@ -660,4 +660,3 @@ A HORIZONTAL event
   right: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
 }
 
-.animated.svelte-3olku3{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.faster.svelte-3olku3{-webkit-animation-duration:500ms;animation-duration:500ms}.fadeIn.svelte-3olku3{-webkit-animation-name:svelte-3olku3-fadeIn;animation-name:svelte-3olku3-fadeIn}@-webkit-keyframes svelte-3olku3-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-3olku3-fadeIn{from{opacity:0}to{opacity:1}}
