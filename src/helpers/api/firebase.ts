@@ -10,7 +10,7 @@ import type {
 	IFireUserInfo,
 	IFireBoardInfo,
 } from "../../interfaces/IFirebase";
-import { formatAMPM } from "../helperFunctions/helperFunctions"
+import { formatAMPM } from "../helperFunctions/helperFunctions";
 import type { ISelectedToggle } from "../../interfaces/IOther";
 
 const createBoardsList = (joined: string, UserId: string): void => {
@@ -62,7 +62,7 @@ export const registerUserDataBase = (
 	FirstName: string,
 	LastName: string,
 	Email: string,
-	UserId: string,
+	UserId: string
 ): void => {
 	const db = firebase.database();
 	const Joined = format(new Date(), "yyyy-mm-dd");
@@ -93,7 +93,7 @@ const getTotalListCounter = (userId: string): Promise<IFireTotalLists> => {
 					reject(listCounter);
 				}
 			});
-		},
+		}
 	);
 	return listCounterPromise;
 };
@@ -108,7 +108,7 @@ const updateListCounter = (total: number, userId: string): void => {
 export const createNewList = async (
 	typeOfList: string,
 	listName: string,
-	userId: string,
+	userId: string
 ): Promise<unknown> => {
 	const listCounter = await getTotalListCounter(userId);
 	const listCounterPlusOne: number = listCounter.TotalLists + 1;
@@ -144,7 +144,7 @@ export const getLanguage = (userId: string): Promise<IFireLanguage> => {
 
 export const updateFirebaseLanguage = (
 	userId: string,
-	lang: string,
+	lang: string
 ): Promise<IFireLanguage> => {
 	const db = firebase.database();
 	return db.ref(`/language/${userId}`).update({
@@ -153,7 +153,7 @@ export const updateFirebaseLanguage = (
 };
 
 export const getNameOfUserThatChecked = (
-	userId: string,
+	userId: string
 ): Promise<IFireNameObject> => {
 	const fPromise: Promise<IFireNameObject> = new Promise((resolve, reject) => {
 		const db = firebase.database();
@@ -181,7 +181,7 @@ export const setBoardData = (
 	day: string,
 	nameObject: IFireNameObject,
 	email: string,
-	time: string,
+	time: string
 ): void => {
 	const db = firebase.database();
 	db.ref(`/boardsData/${userId}/${listId}`).push({
@@ -199,7 +199,7 @@ export const setBoardData = (
 export const deleteBoardItem = (
 	userId: string,
 	listId: string,
-	boardId: string,
+	boardId: string
 ): void => {
 	const db = firebase.database();
 	db.ref(`/boardsData/${userId}/${listId}/${boardId}`).remove();
@@ -218,12 +218,15 @@ export const getUserInfo = (userId: string): Promise<IFireUserInfo> => {
 					reject(userInfo);
 				}
 			});
-		},
+		}
 	);
 	return userInfoPromise;
 };
 
-export const getBoardInfo = (userId: string, listId: string): Promise<IFireBoardInfo> => {
+export const getBoardInfo = (
+	userId: string,
+	listId: string
+): Promise<IFireBoardInfo> => {
 	const boardInfoPromise: Promise<IFireBoardInfo> = new Promise(
 		(resolve, reject) => {
 			const db = firebase.database();
@@ -236,24 +239,33 @@ export const getBoardInfo = (userId: string, listId: string): Promise<IFireBoard
 					reject(board);
 				}
 			});
-		},
+		}
 	);
 	return boardInfoPromise;
 };
 
-export const deleteMultiBoardData = (data: ISelectedToggle, userId: string, listId: string): void => {
+export const deleteMultiBoardData = (
+	data: ISelectedToggle,
+	userId: string,
+	listId: string
+): void => {
 	const db = firebase.database();
 	db.ref(
-		`/multipleBoardsData/${userId}/${listId}/${data.selectedDay}/${data.keyId}`,
+		`/multipleBoardsData/${userId}/${listId}/${data.selectedDay}/${data.keyId}`
 	).remove();
-}
+};
 
-export const addMultiBoardData = async (data: ISelectedToggle, userId: string, listId: string, boardName: string): Promise<void> => {
+export const addMultiBoardData = async (
+	data: ISelectedToggle,
+	userId: string,
+	listId: string,
+	boardName: string
+): Promise<void> => {
 	const userInfo = await getUserInfo(userId);
 	const ct = formatAMPM(new Date());
 	const db = firebase.database();
 	db.ref(
-		`/multipleBoardsData/${userId}/${listId}/${data.selectedDay}/${data.keyId}`,
+		`/multipleBoardsData/${userId}/${listId}/${data.selectedDay}/${data.keyId}`
 	).push({
 		Day: data.selectedDay,
 		DayTrueOrFalse: true,
@@ -268,4 +280,4 @@ export const addMultiBoardData = async (data: ISelectedToggle, userId: string, l
 		FirstNameWhoChecked: userInfo.FirstName,
 		LastNameWhoChecked: userInfo.LastName,
 	});
-}
+};
