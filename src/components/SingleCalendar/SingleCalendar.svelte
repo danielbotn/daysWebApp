@@ -1,6 +1,6 @@
 <script lang="ts">
   import FullCalendar from "svelte-fullcalendar";
-  import SingleInfoModal from "../SingleInfoModal/SingleInfoModal.svelte";
+  import InfoModal from "../InfoModal/InfoModal.svelte";
   import { beforeUpdate, onMount } from "svelte";
   import {
     getNameOfUserThatChecked,
@@ -156,7 +156,7 @@
 </div>
 
 {#if infoModalOpen}
-  <SingleInfoModal
+  <InfoModal
     on:closeModal="{closeModal}"
     infoModalObject="{infoModalObject}"
   />

@@ -8,6 +8,7 @@
 <script lang="ts">
   import FullCalendar from "svelte-fullcalendar";
   import MultiModal from "../MultiModal/MultiModal.svelte";
+  import InfoModal from "../InfoModal/InfoModal.svelte";
   import firebase from "firebase/app";
   import randomColor from "randomcolor";
   import "firebase/database";
@@ -17,6 +18,7 @@
     IFireName,
     IFireMultiDay,
   } from "../../interfaces/IFirebase";
+  import type { IEventObject, IInfo } from "../../interfaces/IOther";
 
   export let listId: string;
   export let language: string;
@@ -30,6 +32,8 @@
   let eventArray: IFireMultiDay[] = [];
   let modalOpen: boolean = false;
   let selectedDay: string = "";
+  let infoModalObject: IInfo = null;
+  let infoModalOpen: boolean = false;
 
   const setLang = (lang: string) => {
     let result: string = "";
@@ -65,6 +69,18 @@
         date: element.Day,
         color: randomColor({ luminosity: "light" }),
         textColor: "black",
+        day: element.Day,
+        dayTrueOrFalse: element.DayTrueOrFalse,
+        email: element.EmailWhoChecked,
+        fieldId: element.FieldId,
+        firstName: element.FirstNameWhoChecked,
+        lastName: element.LastNameWhoChecked,
+        listId: element.ListId,
+        nameOfField: element.NameOfField,
+        nameOfList: element.NameOfList,
+        time: element.Time,
+        typeOfList: element.TypeOfList,
+        userId: element.UserId
       });
     });
     eventArray = result;
@@ -109,6 +125,11 @@
     selectedDay = date;
   };
 
+  const eventClick = (event: IEventObject) => {
+    infoModalOpen = true;
+    infoModalObject = event.extendedProps;
+  };
+
   let options = {
     initialView: "dayGridMonth",
     plugins: [],
@@ -117,7 +138,7 @@
     events: eventArray,
     dateClick: (event: any) => clickOnDate(event.dateStr),
     weekends: true,
-    // eventClick: (event: any) => eventClick(event.event._def),
+    eventClick: (event: any) => eventClick(event.event._def),
     locale: locale,
     locales: locales,
   };
@@ -140,5 +161,12 @@
     boardData="{boardData}"
     selectedDay="{selectedDay}"
     listId="{listId}"
+  />
+{/if}
+
+{#if infoModalOpen}
+  <InfoModal 
+    infoModalObject={infoModalObject}
+    on:closeModal="{() => infoModalOpen = !infoModalOpen}"
   />
 {/if}
