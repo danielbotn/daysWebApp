@@ -9,8 +9,6 @@
   let firebaseUID: string = null;
   let datoHardcodedStrings: IHardcodedStrings = null;
 
-  console.log('infoModalObject', infoModalObject);
-
   userID.subscribe((value) => {
     if (value !== null) {
       firebaseUID = value;

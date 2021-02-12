@@ -156,8 +156,5 @@
 </div>
 
 {#if infoModalOpen}
-  <InfoModal
-    on:closeModal="{closeModal}"
-    infoModalObject="{infoModalObject}"
-  />
+  <InfoModal on:closeModal="{closeModal}" infoModalObject="{infoModalObject}" />
 {/if}

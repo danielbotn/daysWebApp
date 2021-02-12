@@ -80,7 +80,7 @@
         nameOfList: element.NameOfList,
         time: element.Time,
         typeOfList: element.TypeOfList,
-        userId: element.UserId
+        userId: element.UserId,
       });
     });
     eventArray = result;
@@ -165,8 +165,8 @@
 {/if}
 
 {#if infoModalOpen}
-  <InfoModal 
-    infoModalObject={infoModalObject}
-    on:closeModal="{() => infoModalOpen = !infoModalOpen}"
+  <InfoModal
+    infoModalObject="{infoModalObject}"
+    on:closeModal="{() => (infoModalOpen = !infoModalOpen)}"
   />
 {/if}
