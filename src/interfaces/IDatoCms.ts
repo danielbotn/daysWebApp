@@ -34,6 +34,8 @@ export interface IHardcodedStrings {
   checkedBy: string;
   email: string;
   save: string;
+  add: string;
+  addNewItem: string;
 }
 
 export interface ILanguage {

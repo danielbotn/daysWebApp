@@ -39,6 +39,10 @@
   });
 </script>
 
+<svelte:head>
+  <title>{boardName ? boardName : "Multiple List"}</title>
+</svelte:head>
+
 <MultipleCalendar
   listId="{id}"
   language="{lang}"

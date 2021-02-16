@@ -20,7 +20,7 @@
   import { stores } from "@sapper/app";
 
   const { session } = stores();
-  import { userToken, userID } from "../../store";
+  import { userToken, userID, displayName } from "../../store";
 
   import Nav from "../components/Nav/Nav.svelte";
 
@@ -32,11 +32,13 @@
           $session.user = false;
           userToken.set(null);
           userID.set(null);
+          displayName.set(null);
           return;
         }
         const token = await user.getIdToken();
         userToken.set(token);
         userID.set(user.uid);
+        displayName.set(user.email);
         $session.user = token;
         Cookies.set("token", token);
         // refreshes token every 55 minutes to also sync with server-side.

@@ -96,26 +96,30 @@
       const fs = db.ref(`/multipleBoards/${uId}/${listId}`);
       lc.on("value", (snapshot) => {
         const boardValue = snapshot.val();
-        const boardArr = Object.values(boardValue);
-        boardArr.forEach((item) => {
-          const objects = Object.values(item);
-          objects.forEach((obj) => {
-            const ob: IFireMultiDay[] = Object.values(obj);
-            days.push(ob[0]);
+        if (boardValue) {
+          const boardArr = Object.values(boardValue);
+          boardArr.forEach((item) => {
+            const objects = Object.values(item);
+            objects.forEach((obj) => {
+              const ob: IFireMultiDay[] = Object.values(obj);
+              days.push(ob[0]);
+            });
           });
-        });
-        boardData = days;
-        makeEventArray(boardData);
+          boardData = days;
+          makeEventArray(boardData);
+        }
       });
       fs.on("value", (snapshot) => {
         const fieldsValue: IFireFieldObject = snapshot.val();
-        const fieldsArr: IFireName[] = Object.values(fieldsValue);
-        const objectKeys = Object.keys(fieldsValue);
-        fieldsArr.forEach((item, index) => {
-          item["KeyId"] = objectKeys[index];
-        });
-        fields = fieldsArr;
-        makeEventArray(boardData);
+        if (fieldsValue) {
+          const fieldsArr: IFireName[] = Object.values(fieldsValue);
+          const objectKeys = Object.keys(fieldsValue);
+          fieldsArr.forEach((item, index) => {
+            item["KeyId"] = objectKeys[index];
+          });
+          fields = fieldsArr;
+          makeEventArray(boardData);
+        }
       });
     }
   });

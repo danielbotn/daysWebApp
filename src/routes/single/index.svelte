@@ -1,5 +1,5 @@
 <script context="module">
-  export async function preload(page, session) {
+  export async function preload(page) {
     const { id } = page.query;
     return { id };
   }
@@ -35,6 +35,10 @@
     }
   });
 </script>
+
+<svelte:head>
+  <title>{boardName ? boardName : "Single list"}</title>
+</svelte:head>
 
 {#if uId && id && boardName}
   <SingleCalendar

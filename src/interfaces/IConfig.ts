@@ -9,7 +9,7 @@ export interface Query {
 
 export interface IPage {
   host: string;
-  params: {};
+  params: {} | Query;
   path: string;
   query: Query;
 }

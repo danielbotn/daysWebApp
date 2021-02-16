@@ -9,8 +9,9 @@ import type {
 	IFireTotalLists,
 	IFireUserInfo,
 	IFireBoardInfo,
+	IFireName
 } from "../../interfaces/IFirebase";
-import { formatAMPM } from "../helperFunctions/helperFunctions";
+import { formatAMPM, currentDate } from "../helperFunctions/helperFunctions";
 import type { ISelectedToggle } from "../../interfaces/IOther";
 
 const createBoardsList = (joined: string, UserId: string): void => {
@@ -279,5 +280,69 @@ export const addMultiBoardData = async (
 		EmailWhoChecked: userInfo.Email,
 		FirstNameWhoChecked: userInfo.FirstName,
 		LastNameWhoChecked: userInfo.LastName,
+	});
+};
+
+export const checkIfExists = (item: IFireName, userId: string, listId: string): Promise<any> => {
+	const db = firebase.database();
+	const fPromise = new Promise((resolve, reject) => {
+		let allData = null;
+		const rootRef = db.ref();
+		allData = rootRef.child(
+			`/loggerData/${userId}/${listId}/${item.KeyId}`,
+		);
+		allData
+			.once("value")
+			.then((snapshot) => {
+				const snapData = snapshot.val();
+				if (snapData !== null) {
+					resolve({status: "data is not empty"});
+				} else {
+					resolve({status: "data is emtpy"});
+				}
+			})
+			.catch((error) => {
+				reject(error);
+			});
+	});
+	return fPromise;
+};
+
+export const removeLoggerData = (userId: string, listId: string, item: IFireName) :void => {
+	const db = firebase.database();
+	db.ref(`/loggerData/${userId}/${listId}/${item.KeyId}`).remove();
+}
+
+export const addLoggerData = async (
+	userId: string,
+	listId: string,
+	item: IFireName,
+	displayName: string,
+	boardName: string,
+): Promise<void> => {
+	const nameObject = await getNameOfUserThatChecked(userId);
+	console.log("userId", userId);
+	console.log("listId", listId);
+	console.log("item", item);
+	console.log("displayName", displayName);
+	console.log("firstName", nameObject.firstName);
+	console.log("lastName", nameObject.lastName);
+	console.log("boardName", boardName);
+	console.log("typeOfList", "logger");
+	const db = firebase.database();
+	db.ref(`/loggerData/${userId}/${listId}/${item.KeyId}`).push({
+		Day: currentDate(),
+		DayTrueOrFalse: true,
+		UserId: userId,
+		OwnerOfListId: userId,
+		ListId: listId,
+		NameOfList: boardName,
+		TypeOfList: "logger",
+		NameOfField: item.Name,
+		FieldId: item.KeyId,
+		Time: formatAMPM(new Date()),
+		EmailWhoChecked: displayName,
+		FirstNameWhoChecked: nameObject.firstName,
+		LastNameWhoChecked: nameObject.lastName,
 	});
 };
