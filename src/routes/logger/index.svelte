@@ -33,6 +33,6 @@
   <title>{boardName ? boardName : "Logger"}</title>
 </svelte:head>
 
-{#if uId && id}
+{#if uId && id && boardName}
   <Logger boardName="{boardName}" userId="{uId}" listId="{id}" />
 {/if}
