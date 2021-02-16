@@ -18,6 +18,8 @@
   let itemData: IFireMultiDay[] = [];
 
   onMount(async () => {
+    console.log('userId', userId);
+    console.log('listId', listId);
     let logger = null;
     let loggerData = null;
     let tmpData: IFireMultiDay[] = [];

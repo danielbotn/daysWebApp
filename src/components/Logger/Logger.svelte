@@ -23,6 +23,10 @@
       userDisplayName = value;
     }
   });
+  console.log('userDisplayName', userDisplayName);
+  console.log('userId', userId);
+  console.log('listId', listId);
+  console.log('boardName', boardName);
 </script>
 
 <Headline boardName="{boardName}" />
