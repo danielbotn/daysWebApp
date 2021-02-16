@@ -1,15 +1,17 @@
-<script context="module">
-  export async function preload(page) {
-    console.log('page', page);
-    const { id } = page.query;
+<script context="module" lang="ts">
+  import type { IPage } from "../../interfaces/IConfig";
+
+  export async function preload(_page: IPage) {
+    console.log('_page', _page);
+    const { id } = _page.query;
     return { id };
   }
 </script>
 
 <script lang="ts">
   import Logger from "../../components/Logger/Logger.svelte";
-  import { getBoardInfo } from "../../helpers/api/firebase";
   import { userID } from "../../../store";
+  import { getBoardInfo } from "../../helpers/api/firebase";
   
   export let id: string;
 
