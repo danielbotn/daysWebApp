@@ -27,12 +27,14 @@
     }
   };
 
-  userID.subscribe((value: string) => {
-    if (value !== null) {
-      uId = value;
-      setBoardName();
-    }
-  });
+  if (id) {
+    userID.subscribe((value: string) => {
+      if (value !== null) {
+        uId = value;
+        setBoardName();
+      }
+    });
+  }
 </script>
 
 <svelte:head>
