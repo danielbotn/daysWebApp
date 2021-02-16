@@ -2,7 +2,6 @@
   import type { IPage } from "../../interfaces/IConfig";
 
   export async function preload(_page: IPage) {
-    console.log('_page', _page);
     const { id } = _page.query;
     return { id };
   }
@@ -10,7 +9,7 @@
 
 <script lang="ts">
   import Logger from "../../components/Logger/Logger.svelte";
-  import { onMount, beforeUpdate, afterUpdate } from 'svelte';
+  import { beforeUpdate } from 'svelte';
   import { userID } from "../../../store";
   import { getBoardInfo } from "../../helpers/api/firebase";
   
@@ -19,28 +18,19 @@
   let boardName: string = null;
   let uId: string = "";
 
-  onMount(() => {
-		console.log('on mount, id', id);
-	});
-
   beforeUpdate(() => {
-    userID.subscribe((value: string) => {
-    if (value !== null) {
-      uId = value;
-      setBoardName();
+    if (id) {
+      userID.subscribe((value: string) => {
+        if (value !== null) {
+          uId = value;
+          setBoardName();
+        }
+      });
     }
-  });
-		console.log('before update, id', id);
-	});
-
-  afterUpdate(() => {
-		console.log('after update, id', id);
 	});
 
   const setBoardName = async () => {
     if (!boardName) {
-      console.log('UId-->', uId);
-      console.log('iD-->', id);
       const data = await getBoardInfo(uId, id);
       boardName = data.NameOfList;
     }

@@ -321,14 +321,6 @@ export const addLoggerData = async (
 	boardName: string,
 ): Promise<void> => {
 	const nameObject = await getNameOfUserThatChecked(userId);
-	console.log("userId", userId);
-	console.log("listId", listId);
-	console.log("item", item);
-	console.log("displayName", displayName);
-	console.log("firstName", nameObject.firstName);
-	console.log("lastName", nameObject.lastName);
-	console.log("boardName", boardName);
-	console.log("typeOfList", "logger");
 	const db = firebase.database();
 	db.ref(`/loggerData/${userId}/${listId}/${item.KeyId}`).push({
 		Day: currentDate(),
