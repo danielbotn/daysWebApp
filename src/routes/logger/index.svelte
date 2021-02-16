@@ -16,6 +16,8 @@
 
   const setBoardName = async () => {
     if (!boardName) {
+      console.log('UId-->', uId);
+      console.log('iD-->', id);
       const data = await getBoardInfo(uId, id);
       boardName = data.NameOfList;
     }
