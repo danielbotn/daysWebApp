@@ -1,5 +1,6 @@
 <script context="module">
   export async function preload(page) {
+    console.log('page', page);
     const { id } = page.query;
     return { id };
   }
@@ -9,6 +10,7 @@
   import Logger from "../../components/Logger/Logger.svelte";
   import { getBoardInfo } from "../../helpers/api/firebase";
   import { userID } from "../../../store";
+  
   export let id: string;
 
   let boardName: string = null;
