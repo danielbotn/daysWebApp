@@ -10,6 +10,7 @@
 
 <script lang="ts">
   import Logger from "../../components/Logger/Logger.svelte";
+  import { onMount, beforeUpdate, afterUpdate } from 'svelte';
   import { userID } from "../../../store";
   import { getBoardInfo } from "../../helpers/api/firebase";
   
@@ -17,6 +18,18 @@
 
   let boardName: string = null;
   let uId: string = "";
+
+  onMount(() => {
+		console.log('on mount, id', id);
+	});
+
+  beforeUpdate(() => {
+		console.log('before update, id', id);
+	});
+
+  afterUpdate(() => {
+		console.log('after update, id', id);
+	});
 
   const setBoardName = async () => {
     if (!boardName) {
@@ -27,14 +40,12 @@
     }
   };
 
-  if (id) {
-    userID.subscribe((value: string) => {
-      if (value !== null) {
-        uId = value;
-        setBoardName();
-      }
-    });
-  }
+  userID.subscribe((value: string) => {
+    if (value !== null) {
+      uId = value;
+      setBoardName();
+    }
+  });
 </script>
 
 <svelte:head>
