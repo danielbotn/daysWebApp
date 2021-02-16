@@ -24,6 +24,12 @@
 	});
 
   beforeUpdate(() => {
+    userID.subscribe((value: string) => {
+    if (value !== null) {
+      uId = value;
+      setBoardName();
+    }
+  });
 		console.log('before update, id', id);
 	});
 
@@ -40,12 +46,6 @@
     }
   };
 
-  userID.subscribe((value: string) => {
-    if (value !== null) {
-      uId = value;
-      setBoardName();
-    }
-  });
 </script>
 
 <svelte:head>
