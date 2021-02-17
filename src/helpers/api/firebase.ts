@@ -9,7 +9,7 @@ import type {
 	IFireTotalLists,
 	IFireUserInfo,
 	IFireBoardInfo,
-	IFireName
+	IFireName,
 } from "../../interfaces/IFirebase";
 import { formatAMPM, currentDate } from "../helperFunctions/helperFunctions";
 import type { ISelectedToggle } from "../../interfaces/IOther";
@@ -283,22 +283,24 @@ export const addMultiBoardData = async (
 	});
 };
 
-export const checkIfExists = (item: IFireName, userId: string, listId: string): Promise<any> => {
+export const checkIfExists = (
+	item: IFireName,
+	userId: string,
+	listId: string
+): Promise<any> => {
 	const db = firebase.database();
 	const fPromise = new Promise((resolve, reject) => {
 		let allData = null;
 		const rootRef = db.ref();
-		allData = rootRef.child(
-			`/loggerData/${userId}/${listId}/${item.KeyId}`,
-		);
+		allData = rootRef.child(`/loggerData/${userId}/${listId}/${item.KeyId}`);
 		allData
 			.once("value")
 			.then((snapshot) => {
 				const snapData = snapshot.val();
 				if (snapData !== null) {
-					resolve({status: "data is not empty"});
+					resolve({ status: "data is not empty" });
 				} else {
-					resolve({status: "data is emtpy"});
+					resolve({ status: "data is emtpy" });
 				}
 			})
 			.catch((error) => {
@@ -308,16 +310,22 @@ export const checkIfExists = (item: IFireName, userId: string, listId: string): 
 	return fPromise;
 };
 
-export const removeLoggerData = (userId: string, listId: string, item: IFireName) :void => {
+export const removeLoggerData = (
+	userId: string,
+	listId: string,
+	item: IFireName
+): void => {
 	const db = firebase.database();
 	db.ref(`/loggerData/${userId}/${listId}/${item.KeyId}`).remove();
 };
 
-export const removeLoggerField = (userId: string, listId: string, item: IFireName): void => {
+export const removeLoggerField = (
+	userId: string,
+	listId: string,
+	item: IFireName
+): void => {
 	const db = firebase.database();
-	db.ref(
-		`/logger/${userId}/${listId}/${item.KeyId}`,
-	).remove();
+	db.ref(`/logger/${userId}/${listId}/${item.KeyId}`).remove();
 };
 
 export const addLoggerData = async (
@@ -325,7 +333,7 @@ export const addLoggerData = async (
 	listId: string,
 	item: IFireName,
 	displayName: string,
-	boardName: string,
+	boardName: string
 ): Promise<void> => {
 	const nameObject = await getNameOfUserThatChecked(userId);
 	const db = firebase.database();
