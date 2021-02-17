@@ -9,10 +9,10 @@
 
 <script lang="ts">
   import Logger from "../../components/Logger/Logger.svelte";
-  import { beforeUpdate } from 'svelte';
+  import { beforeUpdate } from "svelte";
   import { userID } from "../../../store";
   import { getBoardInfo } from "../../helpers/api/firebase";
-  
+
   export let id: string;
 
   let boardName: string = null;
@@ -27,7 +27,7 @@
         }
       });
     }
-	});
+  });
 
   const setBoardName = async () => {
     if (!boardName) {
@@ -35,7 +35,6 @@
       boardName = data.NameOfList;
     }
   };
-
 </script>
 
 <svelte:head>

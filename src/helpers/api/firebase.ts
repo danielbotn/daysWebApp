@@ -311,7 +311,14 @@ export const checkIfExists = (item: IFireName, userId: string, listId: string): 
 export const removeLoggerData = (userId: string, listId: string, item: IFireName) :void => {
 	const db = firebase.database();
 	db.ref(`/loggerData/${userId}/${listId}/${item.KeyId}`).remove();
-}
+};
+
+export const removeLoggerField = (userId: string, listId: string, item: IFireName): void => {
+	const db = firebase.database();
+	db.ref(
+		`/logger/${userId}/${listId}/${item.KeyId}`,
+	).remove();
+};
 
 export const addLoggerData = async (
 	userId: string,
@@ -338,3 +345,43 @@ export const addLoggerData = async (
 		LastNameWhoChecked: nameObject.lastName,
 	});
 };
+
+export const getLoggerKey = (userId: string, listId: string, item: IFireName): Promise<string> => {
+	const loggerPromise: Promise<string> = new Promise((resolve, reject) => {
+		const db = firebase.database();
+		const tmp = db.ref(
+			`/loggerData/${userId}/${listId}/${item.KeyId}`,
+		);
+		tmp
+			.once("value")
+			.then((snapshot) => {
+				const val = snapshot.val();
+				if (val !== null) {
+					resolve(Object.keys(val)[0]);
+				} else {
+					resolve(null);
+				}
+			})
+			.catch((err) => {
+				// Error handling
+				reject(err);
+				throw err;
+			});
+	});
+	return loggerPromise;
+};
+
+
+export const updateLoggerField = (userId: string, listId: string, item: IFireName, loggerKey: string, newName: string): void => {
+	const db = firebase.database();
+	db.ref(`/logger/${userId}/${listId}/${item.KeyId}`).update({
+		Name: newName,
+	});
+	if (loggerKey !== null) {
+		db.ref(
+			`/loggerData/${userId}/${listId}/${item.KeyId}/${loggerKey}`,
+		).update({
+			NameOfField: newName,
+		});
+	}
+}

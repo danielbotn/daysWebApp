@@ -52,6 +52,7 @@ export interface IFireBoardInfo {
 }
 
 export interface IFireName {
+	value: any;
   Name: string;
   KeyId: string;
 }

@@ -36,6 +36,7 @@ export interface IHardcodedStrings {
   save: string;
   add: string;
   addNewItem: string;
+  updateField: string;
 }
 
 export interface ILanguage {
