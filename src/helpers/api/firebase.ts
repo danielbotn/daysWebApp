@@ -346,12 +346,14 @@ export const addLoggerData = async (
 	});
 };
 
-export const getLoggerKey = (userId: string, listId: string, item: IFireName): Promise<string> => {
+export const getLoggerKey = (
+	userId: string,
+	listId: string,
+	item: IFireName
+): Promise<string> => {
 	const loggerPromise: Promise<string> = new Promise((resolve, reject) => {
 		const db = firebase.database();
-		const tmp = db.ref(
-			`/loggerData/${userId}/${listId}/${item.KeyId}`,
-		);
+		const tmp = db.ref(`/loggerData/${userId}/${listId}/${item.KeyId}`);
 		tmp
 			.once("value")
 			.then((snapshot) => {
@@ -371,17 +373,22 @@ export const getLoggerKey = (userId: string, listId: string, item: IFireName): P
 	return loggerPromise;
 };
 
-
-export const updateLoggerField = (userId: string, listId: string, item: IFireName, loggerKey: string, newName: string): void => {
+export const updateLoggerField = (
+	userId: string,
+	listId: string,
+	item: IFireName,
+	loggerKey: string,
+	newName: string
+): void => {
 	const db = firebase.database();
 	db.ref(`/logger/${userId}/${listId}/${item.KeyId}`).update({
 		Name: newName,
 	});
 	if (loggerKey !== null) {
-		db.ref(
-			`/loggerData/${userId}/${listId}/${item.KeyId}/${loggerKey}`,
-		).update({
-			NameOfField: newName,
-		});
+		db.ref(`/loggerData/${userId}/${listId}/${item.KeyId}/${loggerKey}`).update(
+			{
+				NameOfField: newName,
+			}
+		);
 	}
-}
+};
