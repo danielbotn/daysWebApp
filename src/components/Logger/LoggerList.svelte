@@ -35,22 +35,30 @@
 
     logger.on("value", (snap: { val: () => any }) => {
       const loggerObject = snap.val();
-      const data: IFireName[] = Object.values(loggerObject);
-      const objectKeys = Object.keys(loggerObject);
-      data.forEach((item, index) => {
-        item["KeyId"] = objectKeys[index];
-      });
-      items = data;
+      if (loggerObject) {
+        const data: IFireName[] = Object.values(loggerObject);
+        const objectKeys = Object.keys(loggerObject);
+        data.forEach((item, index) => {
+          item["KeyId"] = objectKeys[index];
+        });
+        items = data;
+      } else {
+        items = [];
+      }
     });
     loggerData.on("value", (snap: { val: () => any }) => {
       const loggerObject = snap.val();
-      const data: IFireName[] = Object.values(loggerObject);
-      const objectKeys = Object.keys(loggerObject);
-      data.forEach((item, index) => {
-        item["KeyId"] = objectKeys[index];
-        tmpData.push(Object.values(item)[0]);
-      });
-      itemData = tmpData;
+      if (loggerObject) {
+        const data: IFireName[] = Object.values(loggerObject);
+        const objectKeys = Object.keys(loggerObject);
+        data.forEach((item, index) => {
+          item["KeyId"] = objectKeys[index];
+          tmpData.push(Object.values(item)[0]);
+        });
+        itemData = tmpData;
+      } else {
+        itemData = [];
+      }
     });
   });
 
@@ -86,47 +94,45 @@
   };
 </script>
 
-{#if items.length > 0 && itemData.length > 0}
-  <ul class="list-reset text-black mb-8 p-8 text-grey-darker rounded shadow-lg">
-    {#each items as item}
-      <div class="text-gray-700 text-center mt-2">
-        <div class="flex justify-between mb-2">
-          <div class="pr-5 pt-2">
-            <input
-              type="checkbox"
-              class="form-checkbox h-5 w-5 text-blue-500"
-              checked="{checkedOrNot(item)}"
-              on:click="{() => checkBoxClick(item)}"
-            />
-          </div>
-          <li
-            class="w-full text-left leading-loose cursor-pointer"
-            on:click="{() => edit(item)}"
-          >
-            {item.Name}
-          </li>
-          <div class="close-btn p-2 pr-8 text-xl cursor-pointer">
-            <div class="cursor-pointer z-50">
-              <button on:click="{() => deleteItem(item)}">
-                <svg
-                  class="fill-current text-black"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
+<ul class="list-reset text-black mb-8 p-8 text-grey-darker rounded shadow-lg">
+  {#each items as item}
+    <div class="text-gray-700 text-center mt-2">
+      <div class="flex justify-between mb-2">
+        <div class="pr-5 pt-2">
+          <input
+            type="checkbox"
+            class="form-checkbox h-5 w-5 text-blue-500"
+            checked="{checkedOrNot(item)}"
+            on:click="{() => checkBoxClick(item)}"
+          />
+        </div>
+        <li
+          class="w-full text-left leading-loose cursor-pointer"
+          on:click="{() => edit(item)}"
+        >
+          {item.Name}
+        </li>
+        <div class="close-btn p-2 pr-8 text-xl cursor-pointer">
+          <div class="cursor-pointer z-50">
+            <button on:click="{() => deleteItem(item)}">
+              <svg
+                class="fill-current text-black"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+              >
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                ></path>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
-    {/each}
-  </ul>
-{/if}
+    </div>
+  {/each}
+</ul>
 
 {#if editModalOpen}
   <LoggerEditModal
