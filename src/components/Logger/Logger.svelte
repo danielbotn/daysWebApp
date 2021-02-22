@@ -27,7 +27,11 @@
 
 <Headline boardName="{boardName}" />
 
-<LoggerForm datoHardcodedStrings="{datoHardcodedStrings}" />
+<LoggerForm 
+  datoHardcodedStrings="{datoHardcodedStrings}"
+  userId="{userId}"
+  listId="{listId}"
+/>
 
 {#if userDisplayName && userId && listId && boardName}
   <LoggerList

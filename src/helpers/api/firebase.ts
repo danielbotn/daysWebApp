@@ -400,3 +400,15 @@ export const updateLoggerField = (
 		);
 	}
 };
+
+export const createLoggerField = (
+	userId: string,
+	listId: string,
+	value: string
+): void => {
+	const db = firebase.database();
+	db.ref(`/logger/${userId}/${listId}`).push({
+		Name: value,
+	});
+};
+

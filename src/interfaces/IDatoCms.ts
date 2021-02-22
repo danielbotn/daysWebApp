@@ -37,6 +37,7 @@ export interface IHardcodedStrings {
   add: string;
   addNewItem: string;
   updateField: string;
+  defaultError: string;
 }
 
 export interface ILanguage {

@@ -84,6 +84,7 @@ export const getHardcodedStrings = async (): Promise<IHardcodedStrings> => {
 						add(locale: en)
 						addNewItem(locale: en)
 						updateField(locale: en)
+						defaultError(locale: en)
 					}
 				}`,
 			}),
@@ -154,6 +155,7 @@ export const changeLangHardcodedStrings = async (lang: string): Promise<IHardcod
 						add(locale: ${newLang})
 						addNewItem(locale: ${newLang})
 						updateField(locale: ${newLang})
+						defaultError(locale: ${newLang})
 					}
 				}`,
 			}),
