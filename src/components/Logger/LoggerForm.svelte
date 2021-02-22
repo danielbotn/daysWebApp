@@ -8,7 +8,7 @@
 
   let item: string = '';
 
-  const addNewItem = async () => {
+  const addNewItem = () => {
     if (item) {
       createLoggerField(userId, listId, item);
       item = '';
@@ -28,7 +28,10 @@
   <div>
     <button
       type="button"
-      class="border border-blue-500 bg-blue-500 hover:border-blue-300 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline mb-6"
+      class={`border border-blue-500 bg-blue-500 
+      hover:border-blue-300 text-white rounded-md
+      px-4 py-2 m-2 transition duration-500 ease select-none 
+      hover:bg-blue-300 focus:outline-none focus:shadow-outline mb-6`}
       on:click={() => addNewItem()}
     >
       {datoHardcodedStrings.add}
